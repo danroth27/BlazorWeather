@@ -29,7 +29,22 @@ else
             </div>
         </div>
         <div class="weather-graph">
+            <TelerikChart Transitions="false">
+                <ChartSeriesItems>
+                    <ChartSeries Color="#ffff88" Type="ChartSeriesType.Line" Data="GetWeather()" Field="@nameof(WeatherResponse.Temperature)"></ChartSeries>
+                </ChartSeriesItems>
 
+                <ChartCategoryAxes>
+                    <ChartCategoryAxis Color="white" Categories="weather.Select(w => GetTimeToDisplay(w)).ToArray()"></ChartCategoryAxis>
+                </ChartCategoryAxes>
+
+                <ChartValueAxes>
+                    <ChartValueAxis Color="white" >
+                        <ChartValueAxisLabels Color="white" Format="@($"{0}°{temperatureUnit}")"></ChartValueAxisLabels>
+                    </ChartValueAxis>
+                </ChartValueAxes>
+
+            </TelerikChart>
         </div>
     </div>
 

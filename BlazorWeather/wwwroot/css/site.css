@@ -19,8 +19,8 @@ html, body {
 
 .weather-now, .weather-graph {
     flex-grow: 1;
-    background-color: rgba(255,255,255,0.1);
     margin: 1.5rem;
+    width: calc(50% - 3rem);
 }
 
 .weather-now {
@@ -30,7 +30,7 @@ html, body {
 }
 
     .weather-now h1 {
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: 200;
         letter-spacing: 1px;
         text-align: center;
@@ -44,7 +44,6 @@ html, body {
     background-repeat: no-repeat;
     background-position: center center;
     width: 100%;
-    min-height: 30vh
 }
 
     .location-img img {
@@ -109,9 +108,9 @@ html, body {
             font-size: 1.2rem;
         }
 
-        .update-info {
-            text-transform: uppercase;
-        }
+.update-info {
+    text-transform: uppercase;
+}
 
 .warm {
     background-image: linear-gradient(#F6CC66, #FCA184);
@@ -125,12 +124,43 @@ html, body {
     background-image: linear-gradient(#172941, #3C6683);
 }
 
-@media (max-width: 767.98px) {
-    #main {
-        flex-direction: column;
-    }
+.weather-graph {
+    background-color: rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 1rem;
 }
 
+.weather-graph .k-chart {
+    height: 100%;
+    max-width: 50vw;
+}
+
+    .weather-graph .k-chart > svg > g > path:first-child {
+        fill: transparent;
+    }
+
+    .weather-graph .k-chart text {
+        font-size: 1rem !important;
+        transform: translateX(-6px);
+    }
+
+    .weather-graph .k-chart path[stroke=white] {
+        stroke-width: 2px !important;
+    }
+
+    @media (max-width: 767.98px) {
+        #main {
+        flex-direction: column;
+    }
+
+    .weather-now, .weather-graph {
+        width: unset;
+    }
+
+    .location-img {
+        min-height: 30vh;
+    }
+}
 /*
 
 .location-img {
