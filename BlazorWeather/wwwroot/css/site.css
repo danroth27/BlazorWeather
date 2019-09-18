@@ -1,0 +1,191 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: white;
+}
+
+a, .btn-link {
+    color: white;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+app {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-row {
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main .top-row {
+    background-color: rgb(53,66,83);
+    justify-content: flex-end;
+}
+
+.main .top-row > a {
+    margin-left: 1.5rem;
+}
+
+.main .content {
+    flex: 1;
+    display: flex;
+}
+
+.warm {
+    background-image: linear-gradient(#F6CC66, #FCA184);
+    flex: 1;
+    padding-top: 20px;
+}
+
+.cold {
+    background-image: linear-gradient(#BDE3FA, #A5C9FD);
+    flex: 1;
+    padding-top: 20px;
+}
+
+
+.night {
+    background-image: linear-gradient(#172941, #3C6683);
+    flex: 1;
+    padding-top: 20px;
+}
+
+.location-img {
+    margin: -20px 0px -40px 0px;
+}
+
+.weather-img {
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.weather-detail {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.temp-unit {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.temp-unit-option {
+    font-size: .9rem;
+}
+
+.sidebar {
+    background-color: rgb(206,214,223);
+}
+
+.sidebar .top-row {
+    background-color: rgb(34,43,53);
+}
+
+.sidebar .navbar-brand {
+    font-size: 1.1rem;
+}
+
+.sidebar .oi {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+.nav-item {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+.nav-item:first-of-type {
+    padding-top: 1rem;
+}
+
+.nav-item:last-of-type {
+    padding-bottom: 1rem;
+}
+
+.nav-item a {
+    color: #d7d7d7;
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+}
+
+.nav-item a.active {
+    background-color: rgb(143,160,184);
+    color: white;
+}
+
+.nav-item a:hover {
+    background-color: rgb(125,146,172);
+    color: white;
+}
+
+.navbar-toggler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+@media (max-width: 767.98px) {
+    .main .top-row {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    app {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .main .top-row {
+        position: sticky;
+        top: 0;
+    }
+
+    .navbar-toggler {
+        display: none;
+    }
+
+    .sidebar .collapse {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+    }
+}
