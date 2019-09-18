@@ -130,26 +130,26 @@ html, body {
     border-radius: 1rem;
 }
 
-.weather-graph .k-chart {
-    height: 100%;
-    max-width: 50vw;
-}
-
-    .weather-graph .k-chart > svg > g > path:first-child {
-        fill: transparent;
+    .weather-graph .k-chart {
+        height: 100%;
+        max-width: 50vw;
     }
 
-    .weather-graph .k-chart text {
-        font-size: 1rem !important;
-        transform: translateX(-6px);
-    }
+        .weather-graph .k-chart > svg > g > path:first-child {
+            fill: transparent;
+        }
 
-    .weather-graph .k-chart path[stroke=white] {
-        stroke-width: 2px !important;
-    }
+        .weather-graph .k-chart text {
+            font-size: 1rem !important;
+            transform: translateX(-6px);
+        }
 
-    @media (max-width: 767.98px) {
-        #main {
+        .weather-graph .k-chart path[stroke=white] {
+            stroke-width: 2px !important;
+        }
+
+@media (max-width: 767.98px) {
+    #main {
         flex-direction: column;
     }
 
@@ -161,29 +161,3 @@ html, body {
         min-height: 30vh;
     }
 }
-/*
-
-.location-img {
-    margin: -20px 0px -40px 0px;
-}
-
-.weather-img {
-    display: block;
-    margin: auto;
-    margin-top: 30px;
-}
-
-.weather-detail {
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-.temp-unit {
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-.temp-unit-option {
-    font-size: .9rem;
-}
-*/

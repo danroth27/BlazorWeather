@@ -35,7 +35,7 @@ else
                 </ChartSeriesItems>
 
                 <ChartCategoryAxes>
-                    <ChartCategoryAxis Color="white" Categories="weather.Select(w => GetTimeToDisplay(w)).ToArray()"></ChartCategoryAxis>
+                    <ChartCategoryAxis Color="white" Categories="chartDatapoints.Select(w => GetTimeToDisplay(w)).ToArray()"></ChartCategoryAxis>
                 </ChartCategoryAxes>
 
                 <ChartValueAxes>
@@ -47,69 +47,19 @@ else
             </TelerikChart>
         </div>
     </div>
-
-    @*
-        <div class="container-fluid">
-            <h1 class="h6 text-center">SEATTLE</h1>
-            <img class="location-img mx-auto d-block" src="spaceneedle.png" alt="Space Needle" width="300" height="300" />
-
-
-            <div class="row justify-content-md-center no-gutters">
-                <div class="col col-md-1">
-                    <img class="weather-img" src="@currentWeather.WeartherUri" alt="@currentWeather.WeatherText" />
-                </div>
-                <div class="col col-md-auto"><span class="display-2">@GetTemperature(currentWeather)</span></div>
-                <div class="col col-md-1">
-                    <span class="display-2">°</span>
-                    <span class="temp-units">
-                        <span class="temp-unit">@temperatureUnit</span>
-                        <span class="temp-unit-option" @onclick="SwitchTemperatureUnit">@(temperatureUnit == "F" ? "C" : "F")</span>
-                    </span>
-                </div>
-            </div>
-
-            <h3 class="text-center">@currentWeather.WeatherText</h3>
-            <p class="text-center">Updated as of @GetTimeToDisplay(currentWeather)</p>
-
-            <p class="text-center">
-                <span class="weather-detail">UV index: @currentWeather.UVIndex</span>
-                <span class="weather-detail">Barometer: @currentWeather.Pressure</span>
-                <span class="weather-detail">Humidity: @currentWeather.RelativeHumidity%</span>
-                <span class="weather-detail">Wind: @currentWeather.WindSpeed mph @currentWeather.WindDirection</span>
-            </p>
-
-
-            <TelerikChart Height="50%">
-                <ChartSeriesItems>
-                    <ChartSeries Type="ChartSeriesType.Line" Data="GetWeather()" Field="@nameof(WeatherResponse.Temperature)"></ChartSeries>
-                </ChartSeriesItems>
-
-                <ChartCategoryAxes>
-                    <ChartCategoryAxis Categories="weather.Select(w => GetTimeToDisplay(w)).ToArray()"></ChartCategoryAxis>
-                </ChartCategoryAxes>
-
-                <ChartValueAxes>
-                    <ChartValueAxis>
-                        <ChartValueAxisLabels Format="@("{0}°" + temperatureUnit)"></ChartValueAxisLabels>
-                    </ChartValueAxis>
-                </ChartValueAxes>
-
-            </TelerikChart>
-        </div>
-    *@
 }
 
 
 @code {
     WeatherResponse currentWeather;
-    IList<WeatherResponse> weather = new List<WeatherResponse>();
+    IList<WeatherResponse> chartDatapoints = new List<WeatherResponse>();
     string temperatureUnit = "F";
 
-    CancellationTokenSource cts = new CancellationTokenSource();
+    CancellationTokenSource streamingWeatherCTS = new CancellationTokenSource();
 
     protected override async Task OnInitializedAsync()
     {
-        UpdateWeather(await WeatherForecastService.GetWeather());
+        currentWeather = await WeatherForecastService.GetWeather();
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -122,20 +72,20 @@ else
 
     async Task GetWeatherUpdates()
     {
-        await foreach (var weatherResponse in WeatherForecastService.GetStreamingWeather(cts.Token))
+        await foreach (var weatherResponse in WeatherForecastService.GetStreamingWeather(streamingWeatherCTS.Token))
         {
-            UpdateWeather(weatherResponse);
+            currentWeather = weatherResponse;
+            AddChartDatapoint(weatherResponse);
             StateHasChanged();
         }
     }
 
-    void UpdateWeather(WeatherResponse weatherUpdate)
+    void AddChartDatapoint(WeatherResponse weatherUpdate)
     {
-        currentWeather = weatherUpdate;
-        weather.Add(weatherUpdate);
-        if (weather.Count > 20)
+        chartDatapoints.Add(weatherUpdate);
+        while (chartDatapoints.Count > 20)
         {
-            weather.RemoveAt(0);
+            chartDatapoints.RemoveAt(0);
         }
     }
 
@@ -164,16 +114,22 @@ else
         temperatureUnit = temperatureUnit == "F" ? "C" : "F";
     }
 
-    float GetTemperature(WeatherResponse w) => temperatureUnit == "F" ? w.Temperature : TemperatureAsCelsius(w.Temperature);
+    float GetTemperature(WeatherResponse w)
+        => temperatureUnit == "F" ? w.Temperature : TemperatureAsCelsius(w.Temperature);
 
-    float TemperatureAsCelsius(float f) => (float)Math.Round((f - 23f) / 1.8f);
+    float TemperatureAsCelsius(float f)
+        => (float)Math.Round((f - 23f) / 1.8f);
 
-    string GetTimeToDisplay(WeatherResponse w) => w.RetrievedTime.ToDateTimeOffset().ToLocalTime().ToString("h:mm tt");
+    string GetTimeToDisplay(WeatherResponse w)
+        => w.RetrievedTime.ToDateTimeOffset().ToLocalTime().ToString("h:mm tt");
 
-    IEnumerable<WeatherResponse> GetWeather() => temperatureUnit == "F" ? weather : weather.Select(w => new WeatherResponse { Temperature = GetTemperature(w) });
+    IEnumerable<WeatherResponse> GetWeather()
+        => temperatureUnit == "F"
+        ? chartDatapoints
+        : chartDatapoints.Select(w => new WeatherResponse { Temperature = GetTemperature(w) });
 
-    public void Dispose()
+    void IDisposable.Dispose()
     {
-        cts.Cancel();
+        streamingWeatherCTS.Cancel();
     }
 }
