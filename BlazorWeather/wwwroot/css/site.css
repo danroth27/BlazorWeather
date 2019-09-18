@@ -141,7 +141,7 @@ html, body {
         .weather-graph .k-chart text {
             font-size: 1rem !important;
             font-weight: bold !important;
-            transform: translateX(-6px);
+            transform: translateX(-3px);
         }
 
         .weather-graph .k-chart path[stroke=white] {
