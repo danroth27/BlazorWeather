@@ -1,17 +1,5 @@
 ﻿@inherits LayoutComponentBase
 
-<Telerik.Blazor.Components.RootComponent.TelerikRootComponent>
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <div class="main">
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/en-us/aspnet/" target="_blank">About</a>
-        </div>
-
-        <div class="content">
-            @Body
-        </div>
-    </div>
-</Telerik.Blazor.Components.RootComponent.TelerikRootComponent>
+<Telerik.Blazor.Components.TelerikRootComponent>
+    @Body
+</Telerik.Blazor.Components.TelerikRootComponent>

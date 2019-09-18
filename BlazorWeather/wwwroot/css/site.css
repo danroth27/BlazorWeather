@@ -1,191 +1,188 @@
-@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+﻿* {
+    box-sizing: border-box;
+}
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: white;
+    height: 100%;
+    margin: 0;
 }
 
-a, .btn-link {
-    color: white;
+#main {
+    min-height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1.5rem;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.weather-now, .weather-graph {
+    flex-grow: 1;
+    margin: 1.5rem;
+    width: calc(50% - 3rem);
 }
 
-app {
-    position: relative;
+.weather-now {
     display: flex;
     flex-direction: column;
-}
-
-.top-row {
-    height: 3.5rem;
-    display: flex;
     align-items: center;
 }
 
-.main {
-    flex: 1;
+    .weather-now h1 {
+        font-size: 1.5rem;
+        font-weight: 200;
+        letter-spacing: 1px;
+        text-align: center;
+        margin: 0 0 1rem 0;
+    }
+
+.location-img {
+    flex-grow: 1;
+    background: url('../spaceneedle.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+}
+
+    .location-img img {
+        width: 100%;
+    }
+
+.temperature {
+    font-size: 6rem;
+    display: inline-block;
+    position: relative;
+}
+
+    .temperature::after {
+        content: "°";
+        position: absolute;
+        font-size: 5rem;
+        top: 0.3rem;
+    }
+
+.unit-switch {
+    position: absolute;
+    bottom: 0.75rem;
+    left: calc(100% + 2rem);
+    width: 200px;
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.temp-unit-option {
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
+
+.summary {
+    text-transform: uppercase;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    padding-right: 20px;
 }
 
-.main .top-row {
-    background-color: rgb(53,66,83);
-    justify-content: flex-end;
+.weather-img {
+    margin-right: -10px;
+    margin-top: 2px;
 }
 
-.main .top-row > a {
-    margin-left: 1.5rem;
-}
-
-.main .content {
-    flex: 1;
+.metrics {
     display: flex;
+    margin-top: 2rem;
+}
+
+    .metrics > div {
+        background: linear-gradient(-45deg, rgba(255,255,255,0.05), rgba(255,255,255,0.35));
+        padding: 0.75rem;
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border-radius: 1rem;
+        border-bottom-right-radius: 0;
+    }
+
+        .metrics > div:not(:last-of-type) {
+            margin-right: 1rem;
+        }
+
+        .metrics > div p {
+            margin: 0;
+            font-weight: 200;
+            font-size: 1.2rem;
+        }
+
+.update-info {
+    text-transform: uppercase;
 }
 
 .warm {
     background-image: linear-gradient(#F6CC66, #FCA184);
-    flex: 1;
-    padding-top: 20px;
 }
 
 .cold {
     background-image: linear-gradient(#BDE3FA, #A5C9FD);
-    flex: 1;
-    padding-top: 20px;
 }
-
 
 .night {
     background-image: linear-gradient(#172941, #3C6683);
-    flex: 1;
-    padding-top: 20px;
 }
 
-.location-img {
-    margin: -20px 0px -40px 0px;
+.weather-graph {
+    background-color: rgba(255,255,255,0.1);
+    padding: 2.5rem;
+    border-radius: 1.5rem;
 }
 
-.weather-img {
-    display: block;
-    margin: auto;
-    margin-top: 30px;
-}
+    .weather-graph .k-chart {
+        height: 100%;
+    }
 
-.weather-detail {
-    padding-left: 5px;
-    padding-right: 5px;
-}
+        .weather-graph .k-chart > svg > g > path:first-child {
+            fill: transparent;
+        }
 
-.temp-unit {
-    font-size: 1rem;
-    font-weight: bold;
-}
+        .weather-graph .k-chart text {
+            font-size: 1rem !important;
+            font-weight: bold !important;
+            transform: translateX(-3px);
+        }
 
-.temp-unit-option {
-    font-size: .9rem;
-}
+        .weather-graph .k-chart path[stroke=white] {
+            stroke-width: 2px !important;
+        }
 
-.sidebar {
-    background-color: rgb(206,214,223);
-}
+        .weather-graph .k-chart path[stroke="rgba(0, 0, 0, 0.08)"] {
+            stroke: rgba(255,255,255,0.18);
+        }
 
-.sidebar .top-row {
-    background-color: rgb(34,43,53);
-}
-
-.sidebar .navbar-brand {
-    font-size: 1.1rem;
-}
-
-.sidebar .oi {
-    width: 2rem;
-    font-size: 1.1rem;
-    vertical-align: text-top;
-    top: -2px;
-}
-
-.nav-item {
-    font-size: 0.9rem;
-    padding-bottom: 0.5rem;
-}
-
-.nav-item:first-of-type {
-    padding-top: 1rem;
-}
-
-.nav-item:last-of-type {
-    padding-bottom: 1rem;
-}
-
-.nav-item a {
-    color: #d7d7d7;
-    border-radius: 4px;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    line-height: 3rem;
-}
-
-.nav-item a.active {
-    background-color: rgb(143,160,184);
-    color: white;
-}
-
-.nav-item a:hover {
-    background-color: rgb(125,146,172);
-    color: white;
-}
-
-.navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.valid.modified:not([type=checkbox]) {
-    outline: 1px solid #26b050;
-}
-
-.invalid {
-    outline: 1px solid red;
-}
-
-.validation-message {
-    color: red;
-}
+        .weather-graph .k-chart path[stroke="#ffff88"] {
+            stroke-width: 4px;
+        }
 
 @media (max-width: 767.98px) {
-    .main .top-row {
-        display: none;
-    }
-}
-
-@media (min-width: 768px) {
-    app {
-        flex-direction: row;
+    #main {
+        flex-direction: column;
     }
 
-    .sidebar {
-        width: 250px;
-        height: 100vh;
-        position: sticky;
-        top: 0;
+    .weather-now, .weather-graph {
+        width: unset;
     }
 
-    .main .top-row {
-        position: sticky;
-        top: 0;
+    .location-img {
+        min-height: 30vh;
     }
 
-    .navbar-toggler {
-        display: none;
+    .weather-graph {
+        height: 50vh;
+        margin: auto;
     }
 
-    .sidebar .collapse {
-        /* Never collapse the sidebar for wide screens */
-        display: block;
+    .wind-details {
+        display: none; /* not enough space on mobile */
     }
 }
