@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Telerik.UI.for.Blazor.Trial" Version="1.7.0" />
+    <PackageReference Include="Telerik.UI.for.Blazor.Trial" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>

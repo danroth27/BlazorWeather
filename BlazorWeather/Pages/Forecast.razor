@@ -40,19 +40,19 @@ else
 
 
         <TelerikChart Height="50%">
-            <TelerikChartSeriesItems>
-                <TelerikChartSeries Type="ChartSeriesType.Line" Data="GetWeather()" Field="@nameof(WeatherResponse.Temperature)"></TelerikChartSeries>
-            </TelerikChartSeriesItems>
+            <ChartSeriesItems>
+                <ChartSeries Type="ChartSeriesType.Line" Data="GetWeather()" Field="@nameof(WeatherResponse.Temperature)"></ChartSeries>
+            </ChartSeriesItems>
 
-            <TelerikChartCategoryAxes>
-                <TelerikChartCategoryAxis Categories="weather.Select(w => GetTimeToDisplay(w)).ToArray()"></TelerikChartCategoryAxis>
-            </TelerikChartCategoryAxes>
+            <ChartCategoryAxes>
+                <ChartCategoryAxis Categories="weather.Select(w => GetTimeToDisplay(w)).ToArray()"></ChartCategoryAxis>
+            </ChartCategoryAxes>
 
-            <TelerikChartValueAxes>
-                <TelerikChartValueAxis>
-                    <TelerikChartValueAxisLabels Format="@("{0}°" + temperatureUnit)"></TelerikChartValueAxisLabels>
-                </TelerikChartValueAxis>
-            </TelerikChartValueAxes>
+            <ChartValueAxes>
+                <ChartValueAxis>
+                    <ChartValueAxisLabels Format="@("{0}°" + temperatureUnit)"></ChartValueAxisLabels>
+                </ChartValueAxis>
+            </ChartValueAxes>
 
         </TelerikChart>
     </div>
