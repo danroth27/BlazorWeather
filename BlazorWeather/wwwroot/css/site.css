@@ -126,8 +126,8 @@ html, body {
 
 .weather-graph {
     background-color: rgba(255,255,255,0.1);
-    padding: 2rem;
-    border-radius: 1rem;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
 }
 
     .weather-graph .k-chart {
@@ -140,11 +140,20 @@ html, body {
 
         .weather-graph .k-chart text {
             font-size: 1rem !important;
+            font-weight: bold !important;
             transform: translateX(-6px);
         }
 
         .weather-graph .k-chart path[stroke=white] {
             stroke-width: 2px !important;
+        }
+
+        .weather-graph .k-chart path[stroke="rgba(0, 0, 0, 0.08)"] {
+            stroke: rgba(255,255,255,0.18);
+        }
+
+        .weather-graph .k-chart path[stroke="#ffff88"] {
+            stroke-width: 4px;
         }
 
 @media (max-width: 767.98px) {
