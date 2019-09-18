@@ -12,7 +12,13 @@ else
         <div class="weather-now">
             <h1>SEATTLE</h1>
             <div class="location-img"></div>
-            <div class="temperature">@GetTemperature(currentWeather)</div>
+            <div class="temperature">
+                @GetTemperature(currentWeather)
+                <div class="unit-switch" @onclick="SwitchTemperatureUnit">
+                    <span class="temp-unit">@temperatureUnit</span>
+                    <span class="temp-unit-option">/ @(temperatureUnit == "F" ? "C" : "F")</span>
+                </div>
+            </div>
             <div class="summary">@currentWeather.WeatherText</div>
             <div class="update-info">Updated @GetTimeToDisplay(currentWeather)</div>
             <div class="metrics">

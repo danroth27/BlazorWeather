@@ -44,6 +44,7 @@ html, body {
     background-repeat: no-repeat;
     background-position: center center;
     width: 100%;
+    min-height: 30vh
 }
 
     .location-img img {
@@ -62,6 +63,20 @@ html, body {
         font-size: 5rem;
         top: 0.3rem;
     }
+
+.unit-switch {
+    position: absolute;
+    bottom: 0.75rem;
+    left: calc(100% + 2rem);
+    width: 200px;
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.temp-unit-option {
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
 
 .summary {
     text-transform: uppercase;
