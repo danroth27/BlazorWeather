@@ -1,4 +1,4 @@
-* {
+﻿* {
     box-sizing: border-box;
 }
 
@@ -22,6 +22,81 @@ html, body {
     background-color: rgba(255,255,255,0.1);
     margin: 1.5rem;
 }
+
+.weather-now {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .weather-now h1 {
+        font-size: 1.5rem;
+        font-weight: 200;
+        letter-spacing: 1px;
+        text-align: center;
+        margin: 0 0 1rem 0;
+    }
+
+.location-img {
+    flex-grow: 1;
+    background: url('../spaceneedle.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+}
+
+    .location-img img {
+        width: 100%;
+    }
+
+.temperature {
+    font-size: 6rem;
+    display: inline-block;
+    position: relative;
+}
+
+    .temperature::after {
+        content: "°";
+        position: absolute;
+        font-size: 5rem;
+        top: 0.3rem;
+    }
+
+.summary {
+    text-transform: uppercase;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.metrics {
+    display: flex;
+    margin-top: 2rem;
+}
+
+    .metrics > div {
+        background: linear-gradient(-45deg, rgba(255,255,255,0.05), rgba(255,255,255,0.35));
+        padding: 0.75rem;
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border-radius: 1rem;
+        border-bottom-right-radius: 0;
+    }
+
+        .metrics > div:not(:last-of-type) {
+            margin-right: 1rem;
+        }
+
+        .metrics > div p {
+            margin: 0;
+            font-weight: 200;
+            font-size: 1.2rem;
+        }
+
+        .update-info {
+            text-transform: uppercase;
+        }
 
 .warm {
     background-image: linear-gradient(#F6CC66, #FCA184);

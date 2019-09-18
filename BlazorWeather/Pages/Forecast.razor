@@ -10,7 +10,17 @@ else
 {
     <div id="main" class="@GetBackgroundClass()">
         <div class="weather-now">
-
+            <h1>SEATTLE</h1>
+            <div class="location-img"></div>
+            <div class="temperature">@GetTemperature(currentWeather)</div>
+            <div class="summary">@currentWeather.WeatherText</div>
+            <div class="update-info">Updated @GetTimeToDisplay(currentWeather)</div>
+            <div class="metrics">
+                <div>UV index <p>@currentWeather.UVIndex</p></div>
+                <div>Barometer <p>@currentWeather.Pressure</p></div>
+                <div>Humidity <p>@currentWeather.RelativeHumidity%</p></div>
+                <div>Wind <p>@currentWeather.WindSpeed mph @currentWeather.WindDirection</p></div>
+            </div>
         </div>
         <div class="weather-graph">
 
