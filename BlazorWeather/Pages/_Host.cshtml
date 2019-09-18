@@ -15,9 +15,7 @@
     <script src="_content/telerik.ui.for.blazor.trial/js/telerik-blazor.js" defer></script>
 </head>
 <body>
-    <app>
-        @(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
-    </app>
+    @(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
 
     <script src="_framework/blazor.server.js"></script>
 </body>
