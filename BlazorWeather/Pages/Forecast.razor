@@ -19,7 +19,10 @@ else
                     <span class="temp-unit-option">/ @(temperatureUnit == "F" ? "C" : "F")</span>
                 </div>
             </div>
-            <div class="summary">@currentWeather.WeatherText</div>
+            <div class="summary">
+                <img class="weather-img" src="@currentWeather.WeartherUri" alt="@currentWeather.WeatherText" />
+                @currentWeather.WeatherText
+            </div>
             <div class="update-info">Updated @GetTimeToDisplay(currentWeather)</div>
             <div class="metrics">
                 <div>UV index <p>@currentWeather.UVIndex</p></div>
