@@ -8,55 +8,64 @@
 }
 else
 {
-<div class="@GetBackgroundClass()">
-    <div class="container-fluid">
-        <h1 class="h6 text-center">SEATTLE</h1>
-        <img class="location-img mx-auto d-block" src="spaceneedle.png" alt="Space Needle" width="300" height="300" />
+    <div id="main" class="@GetBackgroundClass()">
+        <div class="weather-now">
 
-
-        <div class="row justify-content-md-center no-gutters">
-            <div class="col col-md-1">
-                <img class="weather-img" src="@currentWeather.WeartherUri" alt="@currentWeather.WeatherText" />
-            </div>
-            <div class="col col-md-auto"><span class="display-2">@GetTemperature(currentWeather)</span></div>
-            <div class="col col-md-1">
-                <span class="display-2">°</span>
-                <span class="temp-units">
-                    <span class="temp-unit">@temperatureUnit</span>
-                    <span class="temp-unit-option" @onclick="SwitchTemperatureUnit">@(temperatureUnit == "F" ? "C" : "F")</span>
-                </span>
-            </div>
         </div>
+        <div class="weather-graph">
 
-        <h3 class="text-center">@currentWeather.WeatherText</h3>
-        <p class="text-center">Updated as of @GetTimeToDisplay(currentWeather)</p>
-
-        <p class="text-center">
-            <span class="weather-detail">UV index: @currentWeather.UVIndex</span>
-            <span class="weather-detail">Barometer: @currentWeather.Pressure</span>
-            <span class="weather-detail">Humidity: @currentWeather.RelativeHumidity%</span>
-            <span class="weather-detail">Wind: @currentWeather.WindSpeed mph @currentWeather.WindDirection</span>
-        </p>
-
-
-        <TelerikChart Height="50%">
-            <ChartSeriesItems>
-                <ChartSeries Type="ChartSeriesType.Line" Data="GetWeather()" Field="@nameof(WeatherResponse.Temperature)"></ChartSeries>
-            </ChartSeriesItems>
-
-            <ChartCategoryAxes>
-                <ChartCategoryAxis Categories="weather.Select(w => GetTimeToDisplay(w)).ToArray()"></ChartCategoryAxis>
-            </ChartCategoryAxes>
-
-            <ChartValueAxes>
-                <ChartValueAxis>
-                    <ChartValueAxisLabels Format="@("{0}°" + temperatureUnit)"></ChartValueAxisLabels>
-                </ChartValueAxis>
-            </ChartValueAxes>
-
-        </TelerikChart>
+        </div>
     </div>
-</div>
+
+    @*
+        <div class="container-fluid">
+            <h1 class="h6 text-center">SEATTLE</h1>
+            <img class="location-img mx-auto d-block" src="spaceneedle.png" alt="Space Needle" width="300" height="300" />
+
+
+            <div class="row justify-content-md-center no-gutters">
+                <div class="col col-md-1">
+                    <img class="weather-img" src="@currentWeather.WeartherUri" alt="@currentWeather.WeatherText" />
+                </div>
+                <div class="col col-md-auto"><span class="display-2">@GetTemperature(currentWeather)</span></div>
+                <div class="col col-md-1">
+                    <span class="display-2">°</span>
+                    <span class="temp-units">
+                        <span class="temp-unit">@temperatureUnit</span>
+                        <span class="temp-unit-option" @onclick="SwitchTemperatureUnit">@(temperatureUnit == "F" ? "C" : "F")</span>
+                    </span>
+                </div>
+            </div>
+
+            <h3 class="text-center">@currentWeather.WeatherText</h3>
+            <p class="text-center">Updated as of @GetTimeToDisplay(currentWeather)</p>
+
+            <p class="text-center">
+                <span class="weather-detail">UV index: @currentWeather.UVIndex</span>
+                <span class="weather-detail">Barometer: @currentWeather.Pressure</span>
+                <span class="weather-detail">Humidity: @currentWeather.RelativeHumidity%</span>
+                <span class="weather-detail">Wind: @currentWeather.WindSpeed mph @currentWeather.WindDirection</span>
+            </p>
+
+
+            <TelerikChart Height="50%">
+                <ChartSeriesItems>
+                    <ChartSeries Type="ChartSeriesType.Line" Data="GetWeather()" Field="@nameof(WeatherResponse.Temperature)"></ChartSeries>
+                </ChartSeriesItems>
+
+                <ChartCategoryAxes>
+                    <ChartCategoryAxis Categories="weather.Select(w => GetTimeToDisplay(w)).ToArray()"></ChartCategoryAxis>
+                </ChartCategoryAxes>
+
+                <ChartValueAxes>
+                    <ChartValueAxis>
+                        <ChartValueAxisLabels Format="@("{0}°" + temperatureUnit)"></ChartValueAxisLabels>
+                    </ChartValueAxis>
+                </ChartValueAxes>
+
+            </TelerikChart>
+        </div>
+    *@
 }
 
 
@@ -126,7 +135,7 @@ else
 
     float GetTemperature(WeatherResponse w) => temperatureUnit == "F" ? w.Temperature : TemperatureAsCelsius(w.Temperature);
 
-    float TemperatureAsCelsius(float f) => (float) Math.Round((f - 23f) / 1.8f);
+    float TemperatureAsCelsius(float f) => (float)Math.Round((f - 23f) / 1.8f);
 
     string GetTimeToDisplay(WeatherResponse w) => w.RetrievedTime.ToDateTimeOffset().ToLocalTime().ToString("h:mm tt");
 
