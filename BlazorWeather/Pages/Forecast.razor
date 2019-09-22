@@ -4,25 +4,34 @@
 @inject GeolocationService GeolocationService
 @inject ILocalStorageService  LocalStorage
 
-@if (currentWeather == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <div id="main" class="@GetBackgroundClass()">
-        <div class="weather-now">
+<div id="main" class="@GetBackgroundClass()">
+    <div class="weather-now">
+        @if (currentWeather == null)
+        {
+            <p><em>Loading weather for your current location...</em></p>
+        }
+        else if (pinnedLocations == null)
+        {
+            <p><em>Loading pinned locations...</em></p>
+        }
+        else
+        {
             <LocationSearch LocationChanged="LocationChanged" />
-            <h1>@currentLocation.LocalizedName.ToUpper()</h1>
-            <input type="checkbox" checked="@currentLocation.IsPinned" @onchange="PinLocation" />
-            @if (pinnedLocations.Any() && !currentLocation.IsPinned || pinnedLocations.Count() > 1)
-            {
-                <div class="cycle-pins">
-                    <button @onclick="PreviousPinnedLocation">Previous</button>
-                    <button @onclick="NextPinnedLocation">Next</button>
-                </div>
-            }
-            <img src="@GetCurrentLocationImage()" />
+
+            <div class="pinnable-location">
+                <h1>@currentLocation.LocalizedName.ToUpper()</h1>
+                <PushPin IsChecked="@currentLocation.IsPinned" IsCheckedChanged="PinLocation" />
+            </div>
+
+            <div class="location-carousel">
+                <img src="@GetCurrentLocationImage()" />
+                @if (ShowPinnedLocations())
+                {
+                    <img class="previous" @onclick="PreviousPinnedLocation" src="caret-left.svg" alt="Previous pinned location" />
+                    <img class="next" src="caret-right.svg" @onclick="NextPinnedLocation" alt="Next pinned location" />
+                }
+            </div>
+
             <div class="temperature">
                 @GetTemperature()
                 <TemperatureUnitPicker @bind-TemperatureUnit="temperatureUnit" />
@@ -38,56 +47,30 @@ else
                 <div>Humidity <p>@currentWeather.RelativeHumidity%</p></div>
                 <div>Wind <p>@currentWeather.WindSpeed <span class="wind-details">mph @currentWeather.WindDirection</span></p></div>
             </div>
-        </div>
+        }
     </div>
-}
-
+</div>
 
 @code {
     const string PinnedLocationsKey = "PINNED_LOCATIONS";
     WeatherResponse currentWeather;
     string temperatureUnit = "F";
     Location currentLocation;
-    IList<Location> pinnedLocations = new List<Location>();
+    IList<Location> pinnedLocations;
     int pinnedLocationIndex;
 
     CancellationTokenSource streamingWeatherCTS = new CancellationTokenSource();
-
-    protected override async Task OnInitializedAsync()
-    {
-        currentLocation = (await WeatherForecastService.GetLocationsByText("Seattle")).First();
-        currentWeather = await WeatherForecastService.GetWeather(currentLocation.Key);
-    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+
             var geolocation = await GeolocationService.GetLocationAsync();
             currentLocation = await WeatherForecastService.GetLocationByGeolocation(geolocation.Latitude, geolocation.Longitude);
             await LoadPinnedLocations();
             _ = GetWeatherUpdates();
         }
-    }
-
-    async Task LoadPinnedLocations()
-    {
-        if (await LocalStorage.ContainKeyAsync(PinnedLocationsKey))
-        {
-            pinnedLocations = new List<Location>(await LocalStorage.GetItemAsync<Location[]>(PinnedLocationsKey));
-            var currentPinned = pinnedLocations.FirstOrDefault(l => l.Key == currentLocation.Key);
-            if (currentPinned != null)
-            {
-                currentLocation.IsPinned = true;
-                pinnedLocations.Remove(currentPinned);
-                pinnedLocations.Insert(0, currentLocation);
-            }
-        }
-    }
-
-    async Task StorePinnedLocations()
-    {
-        await LocalStorage.SetItemAsync(PinnedLocationsKey, pinnedLocations);
     }
 
     async Task GetWeatherUpdates()
@@ -109,6 +92,30 @@ else
         _ = GetWeatherUpdates();
     }
 
+    async Task LoadPinnedLocations()
+    {
+        if (await LocalStorage.ContainKeyAsync(PinnedLocationsKey))
+        {
+            pinnedLocations = new List<Location>(await LocalStorage.GetItemAsync<Location[]>(PinnedLocationsKey));
+            var currentPinned = pinnedLocations.FirstOrDefault(l => l.Key == currentLocation.Key);
+            if (currentPinned != null)
+            {
+                currentLocation.IsPinned = true;
+                pinnedLocations.Remove(currentPinned);
+                pinnedLocations.Insert(0, currentLocation);
+            }
+        }
+        else
+        {
+            pinnedLocations = new List<Location>();
+        }
+    }
+
+    async Task StorePinnedLocations()
+    {
+        await LocalStorage.SetItemAsync(PinnedLocationsKey, pinnedLocations);
+    }
+
     async Task PinLocation(ChangeEventArgs e)
     {
         currentLocation.IsPinned = (bool)e.Value;
@@ -123,6 +130,8 @@ else
         }
         await StorePinnedLocations();
     }
+
+    bool ShowPinnedLocations() => pinnedLocations.Any() && !currentLocation.IsPinned || pinnedLocations.Count() > 1;
 
     void NextPinnedLocation()
     {
@@ -141,7 +150,7 @@ else
     {
         if (currentWeather == null)
         {
-            return string.Empty;
+            return "warm";
         }
         else if (!currentWeather.IsDayTime)
         {

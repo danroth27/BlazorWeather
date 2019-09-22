@@ -1,6 +1,9 @@
 ﻿@inject IWeatherForecastService WeatherForecastService
 
-<input class="search" list="locations" value="@searchQuery" @onchange="LocationSelected" @oninput="Search" autocomplete="off" spellcheck="false" />
+<div>
+    <img class="@GetSearchClass()" src="@GetSearchIcon()"/>
+    <input class="search" list="locations" value="@searchQuery" @onchange="LocationSelected" @oninput="Search" placeholder="City..." autocomplete="off" spellcheck="false" />
+</div>
 
 <datalist id="locations">
     @foreach (var location in locations.Take(10))
@@ -25,20 +28,29 @@
 
     async Task Search(ChangeEventArgs e)
     {
-        if (tokenSource != null && !tokenSource.IsCancellationRequested)
+        if (IsSearchInProgress())
         {
-            tokenSource.Cancel();
-            tokenSource.Dispose();
+            CancelSearch();
         }
-        searchQuery = (string)e.Value;
         noResults = false;
-        tokenSource = new CancellationTokenSource();
-        await Task.Delay(1000, tokenSource.Token); // Only search if not typing for 1sec
+        searchQuery = (string)e.Value;
         if (!string.IsNullOrWhiteSpace(searchQuery))
         {
+            tokenSource = new CancellationTokenSource();
+            await Task.Delay(1000, tokenSource.Token); // Only search if not typing for 1sec
             locations = await WeatherForecastService.GetLocationsByText(searchQuery);
             noResults = locations.Length == 0;
+            tokenSource.Dispose();
+            tokenSource = null;
         }
+    }
+
+    bool IsSearchInProgress() => tokenSource != null && !tokenSource.IsCancellationRequested;
+
+    void CancelSearch()
+    {
+        tokenSource.Cancel();
+        tokenSource.Dispose();
     }
 
     void LocationSelected(ChangeEventArgs e)
@@ -47,11 +59,17 @@
         var selectedLocation = locations.FirstOrDefault(l => CityState(l) == locationName);
         if (selectedLocation != null)
         {
+            CancelSearch();
             searchQuery = null;
+            noResults = false;
             locations = new Location[0];
             LocationChanged.InvokeAsync(selectedLocation);
         }
     }
 
     string CityState(Location location) => $"{location.LocalizedName}, {location.AdministrativeArea.ID}";
+
+    string GetSearchClass() => IsSearchInProgress() ? "search-icon spinning" : "search-icon";
+
+    string GetSearchIcon() => IsSearchInProgress() ? "loop-circular.svg" : "magnifying-glass.svg";
 }

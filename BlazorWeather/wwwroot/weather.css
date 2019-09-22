@@ -37,8 +37,24 @@ html, body {
         margin: 0 0 1rem 0;
     }
 
-    .location-img img {
-        width: 100%;
+.location-carousel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+    .location-carousel .previous {
+        order: 1;
+        height: 30px;
+    }
+
+    .location-carousel img {
+        order: 2;
+    }
+
+    .location-carousel .next {
+        order: 3;
+        height: 30px;
     }
 
 .temperature {
@@ -137,11 +153,6 @@ html, body {
         min-height: 30vh;
     }
 
-    .weather-graph {
-        height: 50vh;
-        margin: auto;
-    }
-
     .wind-details {
         display: none; /* not enough space on mobile */
     }
@@ -216,3 +227,66 @@ h3 {
 .cycle-pins {
     margin-bottom: 10px;
 }
+
+.search-icon {
+    width: 17px;
+    vertical-align: middle;
+}
+
+    .search-icon.spinning {
+        animation: spin 4s linear infinite;
+    }
+
+@keyframes spin {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+/* Customize the pushpin container */
+.pushpin-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+    /* Hide the browser's default checkbox */
+    .pushpin-container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+/* Create a custom checkbox */
+.pushpin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-image: url(pin.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform: rotate(90deg)
+}
+
+/* Show the checkmark when checked */
+.pushpin-container input:checked ~ .pushpin {
+    transform: none;
+}
+
+.pinnable-location h1 {
+    display: inline-block;
+}
+
+.pinnable-location .pushpin-container {
+    vertical-align: middle;
+    float: right;
+    margin-top: 5px;  
+}
+
