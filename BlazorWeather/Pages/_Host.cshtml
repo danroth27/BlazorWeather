@@ -9,9 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather.Blazor</title>
     <base href="~/" />
-    <link href="css/site.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/@@progress/kendo-theme-default@@latest/dist/all.css" />
-    <script src="_content/telerik.ui.for.blazor.trial/js/telerik-blazor.js" defer></script>
+    <link href="weather.css" rel="stylesheet" />
+    <script src="_content/AspNetMonsters.Blazor.Geolocation/Location.js" ></script>
 </head>
 <body>
     @(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))

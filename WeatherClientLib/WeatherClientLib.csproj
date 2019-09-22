@@ -5,18 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.8.0" />
-    <PackageReference Include="Grpc.Net.ClientFactory" Version="0.2.23-pre2" />
-    <PackageReference Include="Grpc.Tools" Version="2.23.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Protobuf Include="Protos\proto.proto" GrpcServices="Client">
-      <SourceUri>https://netconf.westus2.cloudapp.azure.com/proto</SourceUri>
-    </Protobuf>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.0-rc1.19456.10" />
+    <PackageReference Include="System.Text.Json" Version="4.6.0-rc1.19456.4" />
   </ItemGroup>
 
 </Project>

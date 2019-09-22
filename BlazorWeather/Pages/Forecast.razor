@@ -1,6 +1,8 @@
 ﻿@page "/"
 @implements IDisposable
 @inject IWeatherForecastService WeatherForecastService
+@inject GeolocationService GeolocationService
+@inject ILocalStorageService  LocalStorage
 
 @if (currentWeather == null)
 {
@@ -10,20 +12,26 @@ else
 {
     <div id="main" class="@GetBackgroundClass()">
         <div class="weather-now">
-            <h1>SEATTLE</h1>
-            <div class="location-img"></div>
-            <div class="temperature">
-                @GetTemperature(currentWeather)
-                <div class="unit-switch" @onclick="SwitchTemperatureUnit">
-                    <span class="temp-unit">@temperatureUnit</span>
-                    <span class="temp-unit-option">/ @(temperatureUnit == "F" ? "C" : "F")</span>
+            <LocationSearch LocationChanged="LocationChanged" />
+            <h1>@currentLocation.LocalizedName.ToUpper()</h1>
+            <input type="checkbox" checked="@currentLocation.IsPinned" @onchange="PinLocation" />
+            @if (pinnedLocations.Any() && !currentLocation.IsPinned || pinnedLocations.Count() > 1)
+            {
+                <div class="cycle-pins">
+                    <button @onclick="PreviousPinnedLocation">Previous</button>
+                    <button @onclick="NextPinnedLocation">Next</button>
                 </div>
+            }
+            <img src="@GetCurrentLocationImage()" />
+            <div class="temperature">
+                @GetTemperature()
+                <TemperatureUnitPicker @bind-TemperatureUnit="temperatureUnit" />
             </div>
             <div class="summary">
-                <img class="weather-img" src="@currentWeather.WeartherUri" alt="@currentWeather.WeatherText" />
+                <img class="weather-img" src="@currentWeather.WeatherUri" alt="@currentWeather.WeatherText" />
                 @currentWeather.WeatherText
             </div>
-            <div class="update-info">Updated @GetTimeToDisplay(currentWeather)</div>
+            <div class="update-info">Updated @GetTimeToDisplay()</div>
             <div class="metrics">
                 <div>UV index <p>@currentWeather.UVIndex</p></div>
                 <div>Barometer <p>@currentWeather.Pressure</p></div>
@@ -31,64 +39,102 @@ else
                 <div>Wind <p>@currentWeather.WindSpeed <span class="wind-details">mph @currentWeather.WindDirection</span></p></div>
             </div>
         </div>
-        <div class="weather-graph">
-            <TelerikChart Transitions="false" Height="100%">
-                <ChartSeriesItems>
-                    <ChartSeries Color="#ffff88" Type="ChartSeriesType.Line" Data="GetWeather()" Field="@nameof(WeatherResponse.Temperature)"></ChartSeries>
-                </ChartSeriesItems>
-
-                <ChartCategoryAxes>
-                    <ChartCategoryAxis Color="white" Categories="chartDatapoints.Select(w => GetTimeToDisplay(w)).ToArray()"></ChartCategoryAxis>
-                </ChartCategoryAxes>
-
-                <ChartValueAxes>
-                    <ChartValueAxis Color="white" >
-                        <ChartValueAxisLabels Color="white" Format="@($"{0}°{temperatureUnit}")"></ChartValueAxisLabels>
-                    </ChartValueAxis>
-                </ChartValueAxes>
-            </TelerikChart>
-        </div>
     </div>
 }
 
 
 @code {
+    const string PinnedLocationsKey = "PINNED_LOCATIONS";
     WeatherResponse currentWeather;
-    IList<WeatherResponse> chartDatapoints = new List<WeatherResponse>();
     string temperatureUnit = "F";
+    Location currentLocation;
+    IList<Location> pinnedLocations = new List<Location>();
+    int pinnedLocationIndex;
 
     CancellationTokenSource streamingWeatherCTS = new CancellationTokenSource();
 
     protected override async Task OnInitializedAsync()
     {
-        currentWeather = await WeatherForecastService.GetWeather();
+        currentLocation = (await WeatherForecastService.GetLocationsByText("Seattle")).First();
+        currentWeather = await WeatherForecastService.GetWeather(currentLocation.Key);
     }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            var geolocation = await GeolocationService.GetLocationAsync();
+            currentLocation = await WeatherForecastService.GetLocationByGeolocation(geolocation.Latitude, geolocation.Longitude);
+            await LoadPinnedLocations();
             _ = GetWeatherUpdates();
         }
     }
 
+    async Task LoadPinnedLocations()
+    {
+        if (await LocalStorage.ContainKeyAsync(PinnedLocationsKey))
+        {
+            pinnedLocations = new List<Location>(await LocalStorage.GetItemAsync<Location[]>(PinnedLocationsKey));
+            var currentPinned = pinnedLocations.FirstOrDefault(l => l.Key == currentLocation.Key);
+            if (currentPinned != null)
+            {
+                currentLocation.IsPinned = true;
+                pinnedLocations.Remove(currentPinned);
+                pinnedLocations.Insert(0, currentLocation);
+            }
+        }
+    }
+
+    async Task StorePinnedLocations()
+    {
+        await LocalStorage.SetItemAsync(PinnedLocationsKey, pinnedLocations);
+    }
+
     async Task GetWeatherUpdates()
     {
-        await foreach (var weatherResponse in WeatherForecastService.GetStreamingWeather(streamingWeatherCTS.Token))
+        await foreach (var weatherResponse in WeatherForecastService.GetStreamingWeather(currentLocation.Key, streamingWeatherCTS.Token))
         {
             currentWeather = weatherResponse;
-            AddChartDatapoint(weatherResponse);
             StateHasChanged();
         }
     }
 
-    void AddChartDatapoint(WeatherResponse weatherUpdate)
+    void LocationChanged(Location newLocation)
     {
-        chartDatapoints.Add(weatherUpdate);
-        while (chartDatapoints.Count > 20)
+
+        currentLocation = pinnedLocations.FirstOrDefault(l => l.Key == newLocation.Key) ?? newLocation;
+        streamingWeatherCTS.Cancel();
+        streamingWeatherCTS.Dispose();
+        streamingWeatherCTS = new CancellationTokenSource();
+        _ = GetWeatherUpdates();
+    }
+
+    async Task PinLocation(ChangeEventArgs e)
+    {
+        currentLocation.IsPinned = (bool)e.Value;
+        if (currentLocation.IsPinned)
         {
-            chartDatapoints.RemoveAt(0);
+            pinnedLocations.Add(currentLocation);
+            pinnedLocationIndex = pinnedLocations.Count() - 1;
         }
+        else
+        {
+            pinnedLocations.Remove(currentLocation);
+        }
+        await StorePinnedLocations();
+    }
+
+    void NextPinnedLocation()
+    {
+        pinnedLocationIndex = (pinnedLocationIndex + 1) % pinnedLocations.Count();
+        LocationChanged(pinnedLocations[pinnedLocationIndex]);
+    }
+
+    void PreviousPinnedLocation()
+    {
+        int count = pinnedLocations.Count();
+        pinnedLocationIndex = (pinnedLocationIndex + count - 1) % count;
+        LocationChanged(pinnedLocations[pinnedLocationIndex]);
     }
 
     string GetBackgroundClass()
@@ -116,19 +162,29 @@ else
         temperatureUnit = temperatureUnit == "F" ? "C" : "F";
     }
 
-    float GetTemperature(WeatherResponse w)
-        => temperatureUnit == "F" ? w.Temperature : TemperatureAsCelsius(w.Temperature);
+    float GetTemperature()
+        => temperatureUnit == "F" ? currentWeather.Temperature : TemperatureAsCelsius(currentWeather.Temperature);
 
     float TemperatureAsCelsius(float f)
         => (float)Math.Round((f - 23f) / 1.8f);
 
-    string GetTimeToDisplay(WeatherResponse w)
-        => w.RetrievedTime.ToDateTimeOffset().ToLocalTime().ToString("h:mm tt");
+    string GetTimeToDisplay()
+        => currentWeather.RetrievedTime.ToLocalTime().ToString("T");
 
-    IEnumerable<WeatherResponse> GetWeather()
-        => temperatureUnit == "F"
-        ? chartDatapoints
-        : chartDatapoints.Select(w => new WeatherResponse { Temperature = GetTemperature(w) });
+    string GetCurrentLocationImage()
+    {
+        switch (currentLocation.AdministrativeArea.ID)
+        {
+            case "WA":
+            case "NY":
+            case "MO":
+            case "IL":
+            case "HI":
+                return $"{currentLocation.AdministrativeArea.ID}.png";
+            default:
+                return "wa.png";
+        }
+    }
 
     void IDisposable.Dispose()
     {

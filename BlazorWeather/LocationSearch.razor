@@ -1,0 +1,57 @@
+﻿@inject IWeatherForecastService WeatherForecastService
+
+<input class="search" list="locations" value="@searchQuery" @onchange="LocationSelected" @oninput="Search" autocomplete="off" spellcheck="false" />
+
+<datalist id="locations">
+    @foreach (var location in locations.Take(10))
+    {
+        <option value="@CityState(location)"></option>
+    }
+</datalist>
+
+@if (noResults)
+{
+    <p>No results.</p>
+}
+
+@code {
+    string searchQuery;
+    Location[] locations = new Location[0];
+    CancellationTokenSource tokenSource;
+    bool noResults;
+
+    [Parameter]
+    public EventCallback<Location> LocationChanged { get; set; }
+
+    async Task Search(ChangeEventArgs e)
+    {
+        if (tokenSource != null && !tokenSource.IsCancellationRequested)
+        {
+            tokenSource.Cancel();
+            tokenSource.Dispose();
+        }
+        searchQuery = (string)e.Value;
+        noResults = false;
+        tokenSource = new CancellationTokenSource();
+        await Task.Delay(1000, tokenSource.Token); // Only search if not typing for 1sec
+        if (!string.IsNullOrWhiteSpace(searchQuery))
+        {
+            locations = await WeatherForecastService.GetLocationsByText(searchQuery);
+            noResults = locations.Length == 0;
+        }
+    }
+
+    void LocationSelected(ChangeEventArgs e)
+    {
+        var locationName = (string)e.Value;
+        var selectedLocation = locations.FirstOrDefault(l => CityState(l) == locationName);
+        if (selectedLocation != null)
+        {
+            searchQuery = null;
+            locations = new Location[0];
+            LocationChanged.InvokeAsync(selectedLocation);
+        }
+    }
+
+    string CityState(Location location) => $"{location.LocalizedName}, {location.AdministrativeArea.ID}";
+}
