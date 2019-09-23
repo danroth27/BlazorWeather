@@ -4,7 +4,7 @@
 
 <div>
     <img class="@GetSearchClass()" src="@GetSearchIcon()" />
-    <input class="search" list="locations" @bind="@SearchQuery" @bind:event="oninput" @onchange="LocationSelected" placeholder="City..." autocomplete="off" spellcheck="false" />
+    <input class="search" list="locations" @bind="@SearchQuery" @bind:event="oninput" @onchange="LocationSelected" placeholder="US city..." autocomplete="off" spellcheck="false" />
     <img class="current-location" src="target.svg" @onclick="GetLocalWeather" />
 </div>
 
