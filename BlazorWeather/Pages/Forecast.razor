@@ -7,8 +7,6 @@
     <div class="weather-now">
         <h1 class="page-title">BLAZOR WEATHER</h1>
 
-        <LocationSearch LocationChanged="LocationChanged" />
-
         @if (currentWeather == null)
         {
             <p><em>Search for a city, or use your current location.</em></p>
@@ -17,16 +15,10 @@
         {
             <div class="pinnable-location">
                 <h1>@currentLocation.LocalizedName.ToUpper()</h1>
-                <PushPin IsChecked="@currentLocation.IsPinned" IsCheckedChanged="PinLocation" />
             </div>
 
             <div class="location-carousel">
                 <img src="@GetCurrentLocationImage()" />
-                @if (ShowPinnedLocations())
-                {
-                    <img class="previous" @onclick="PreviousPinnedLocation" src="caret-left.svg" alt="Previous pinned location" />
-                    <img class="next" src="caret-right.svg" @onclick="NextPinnedLocation" alt="Next pinned location" />
-                }
             </div>
 
             <div class="temperature">
@@ -57,13 +49,13 @@
 
     CancellationTokenSource streamingWeatherCTS = new CancellationTokenSource();
 
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        Console.WriteLine(nameof(OnAfterRenderAsync));
         if (firstRender)
         {
-            pinnedLocations = await PinnedLocationsService.LoadPinnedLocations();
-            currentLocation = pinnedLocations.FirstOrDefault();
+            pinnedLocations = new List<Location>(); // temp
+            currentLocation = (await WeatherForecastService.GetLocationsByText("Seattle")).First(); // temp
             if (currentLocation != null)
             {
                 _ = GetWeatherUpdates();
@@ -101,7 +93,6 @@
         {
             pinnedLocations.Remove(currentLocation);
         }
-        await PinnedLocationsService.SavePinnedLocations(pinnedLocations);
     }
 
     bool ShowPinnedLocations() => pinnedLocations.Any() && !currentLocation.IsPinned || pinnedLocations.Count() > 1;
