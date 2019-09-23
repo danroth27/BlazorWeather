@@ -10,4 +10,4 @@ Local storage is handled using [Blazored.LocalStorage](https://github.com/blazor
 
 Space Needle icon by [Blair Adams via The Noun Project](https://thenounproject.com/search/?q=space%20needle&i=915578).
 
-The [demo site](https://aka.ms/blazorworkshop) is hosted on a free Azure site, so be gentle :smile:.
+The [demo site](https://aka.ms/blazorweather) is hosted on a free Azure site, so be gentle :smile:.
