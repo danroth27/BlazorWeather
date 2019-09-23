@@ -1,8 +1,10 @@
 ﻿@inject IWeatherForecastService WeatherForecastService
+@inject GeolocationService GeolocationService
 
 <div>
-    <img class="@GetSearchClass()" src="@GetSearchIcon()"/>
-    <input class="search" list="locations" value="@searchQuery" @onchange="LocationSelected" @oninput="Search" placeholder="City..." autocomplete="off" spellcheck="false" />
+    <img class="@GetSearchClass()" src="@GetSearchIcon()" />
+    <input class="search" list="locations" value="@searchQuery" @oninput="OnInput" @onchange="LocationSelected" placeholder="City..." autocomplete="off" spellcheck="false" />
+    <img class="current-location" src="target.svg" @onclick="GetLocalWeather" />
 </div>
 
 <datalist id="locations">
@@ -19,38 +21,53 @@
 
 @code {
     string searchQuery;
+    bool isSearching;
     Location[] locations = new Location[0];
-    CancellationTokenSource tokenSource;
+    System.Timers.Timer timer;
     bool noResults;
+
+    protected override void OnInitialized()
+    {
+        timer = new System.Timers.Timer(1000);
+        timer.Elapsed += Search;
+        timer.AutoReset = false;
+    }
 
     [Parameter]
     public EventCallback<Location> LocationChanged { get; set; }
 
-    async Task Search(ChangeEventArgs e)
+    async Task GetLocalWeather()
     {
-        if (IsSearchInProgress())
-        {
-            CancelSearch();
-        }
-        noResults = false;
+        isSearching = true;
+        var geolocation = await GeolocationService.GetLocationAsync();
+        var currentLocation = await WeatherForecastService.GetLocationByGeolocation(geolocation.Latitude, geolocation.Longitude);
+        isSearching = false;
+        await LocationChanged.InvokeAsync(currentLocation);
+    }
+
+    void OnInput(ChangeEventArgs e)
+    {
         searchQuery = (string)e.Value;
+        timer.Stop();
         if (!string.IsNullOrWhiteSpace(searchQuery))
         {
-            tokenSource = new CancellationTokenSource();
-            await Task.Delay(1000, tokenSource.Token); // Only search if not typing for 1sec
-            locations = await WeatherForecastService.GetLocationsByText(searchQuery);
-            noResults = locations.Length == 0;
-            tokenSource.Dispose();
-            tokenSource = null;
+            isSearching = true;
+            timer.Start();
         }
     }
 
-    bool IsSearchInProgress() => tokenSource != null && !tokenSource.IsCancellationRequested;
-
-    void CancelSearch()
+    void Search(Object source, System.Timers.ElapsedEventArgs e)
     {
-        tokenSource.Cancel();
-        tokenSource.Dispose();
+        InvokeAsync(async () =>
+        {
+            if (!string.IsNullOrWhiteSpace(searchQuery))
+            {
+                locations = await WeatherForecastService.GetLocationsByText(searchQuery);
+                isSearching = false;
+                noResults = locations.Length == 0;
+                StateHasChanged();
+            }
+        });
     }
 
     void LocationSelected(ChangeEventArgs e)
@@ -59,7 +76,8 @@
         var selectedLocation = locations.FirstOrDefault(l => CityState(l) == locationName);
         if (selectedLocation != null)
         {
-            CancelSearch();
+            timer.Stop();
+            isSearching = false;
             searchQuery = null;
             noResults = false;
             locations = new Location[0];
@@ -69,7 +87,7 @@
 
     string CityState(Location location) => $"{location.LocalizedName}, {location.AdministrativeArea.ID}";
 
-    string GetSearchClass() => IsSearchInProgress() ? "search-icon spinning" : "search-icon";
+    string GetSearchClass() => isSearching ? "search-icon spinning" : "search-icon";
 
-    string GetSearchIcon() => IsSearchInProgress() ? "loop-circular.svg" : "magnifying-glass.svg";
+    string GetSearchIcon() => isSearching ? "loop-circular.svg" : "magnifying-glass.svg";
 }

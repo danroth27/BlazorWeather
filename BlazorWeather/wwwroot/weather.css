@@ -37,6 +37,10 @@ html, body {
         margin: 0 0 1rem 0;
     }
 
+    .weather-now .page-title {
+        font-size: 2rem;
+    }
+
 .location-carousel {
     display: flex;
     flex-direction: row;
@@ -247,7 +251,6 @@ h3 {
 .pushpin-container {
     display: block;
     position: relative;
-    padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
     user-select: none;
@@ -290,3 +293,7 @@ h3 {
     margin-top: 5px;  
 }
 
+.current-location {
+    width: 17px;
+    vertical-align: middle;
+}

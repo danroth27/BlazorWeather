@@ -37,6 +37,7 @@ namespace BlazorWeather
 
             services.AddScoped<GeolocationService>();
             services.AddBlazoredLocalStorage();
+            services.AddScoped<PinnedLocationsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

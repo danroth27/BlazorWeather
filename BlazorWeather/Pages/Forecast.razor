@@ -1,23 +1,20 @@
 ﻿@page "/"
 @implements IDisposable
 @inject IWeatherForecastService WeatherForecastService
-@inject GeolocationService GeolocationService
-@inject ILocalStorageService  LocalStorage
+@inject PinnedLocationsService PinnedLocationsService
 
 <div id="main" class="@GetBackgroundClass()">
     <div class="weather-now">
+        <h1 class="page-title">BLAZOR WEATHER</h1>
+
+        <LocationSearch LocationChanged="LocationChanged" />
+
         @if (currentWeather == null)
         {
-            <p><em>Loading weather for your current location...</em></p>
-        }
-        else if (pinnedLocations == null)
-        {
-            <p><em>Loading pinned locations...</em></p>
+            <p><em>Search for a city, or use your current location.</em></p>
         }
         else
         {
-            <LocationSearch LocationChanged="LocationChanged" />
-
             <div class="pinnable-location">
                 <h1>@currentLocation.LocalizedName.ToUpper()</h1>
                 <PushPin IsChecked="@currentLocation.IsPinned" IsCheckedChanged="PinLocation" />
@@ -52,7 +49,6 @@
 </div>
 
 @code {
-    const string PinnedLocationsKey = "PINNED_LOCATIONS";
     WeatherResponse currentWeather;
     string temperatureUnit = "F";
     Location currentLocation;
@@ -63,13 +59,15 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        Console.WriteLine(nameof(OnAfterRenderAsync));
         if (firstRender)
         {
-
-            var geolocation = await GeolocationService.GetLocationAsync();
-            currentLocation = await WeatherForecastService.GetLocationByGeolocation(geolocation.Latitude, geolocation.Longitude);
-            await LoadPinnedLocations();
-            _ = GetWeatherUpdates();
+            pinnedLocations = await PinnedLocationsService.LoadPinnedLocations();
+            currentLocation = pinnedLocations.FirstOrDefault();
+            if (currentLocation != null)
+            {
+                _ = GetWeatherUpdates();
+            }
         }
     }
 
@@ -84,36 +82,11 @@
 
     void LocationChanged(Location newLocation)
     {
-
         currentLocation = pinnedLocations.FirstOrDefault(l => l.Key == newLocation.Key) ?? newLocation;
         streamingWeatherCTS.Cancel();
         streamingWeatherCTS.Dispose();
         streamingWeatherCTS = new CancellationTokenSource();
         _ = GetWeatherUpdates();
-    }
-
-    async Task LoadPinnedLocations()
-    {
-        if (await LocalStorage.ContainKeyAsync(PinnedLocationsKey))
-        {
-            pinnedLocations = new List<Location>(await LocalStorage.GetItemAsync<Location[]>(PinnedLocationsKey));
-            var currentPinned = pinnedLocations.FirstOrDefault(l => l.Key == currentLocation.Key);
-            if (currentPinned != null)
-            {
-                currentLocation.IsPinned = true;
-                pinnedLocations.Remove(currentPinned);
-                pinnedLocations.Insert(0, currentLocation);
-            }
-        }
-        else
-        {
-            pinnedLocations = new List<Location>();
-        }
-    }
-
-    async Task StorePinnedLocations()
-    {
-        await LocalStorage.SetItemAsync(PinnedLocationsKey, pinnedLocations);
     }
 
     async Task PinLocation(ChangeEventArgs e)
@@ -128,7 +101,7 @@
         {
             pinnedLocations.Remove(currentLocation);
         }
-        await StorePinnedLocations();
+        await PinnedLocationsService.SavePinnedLocations(pinnedLocations);
     }
 
     bool ShowPinnedLocations() => pinnedLocations.Any() && !currentLocation.IsPinned || pinnedLocations.Count() > 1;
@@ -166,16 +139,12 @@
         }
     }
 
-    void SwitchTemperatureUnit()
-    {
-        temperatureUnit = temperatureUnit == "F" ? "C" : "F";
-    }
+    void SwitchTemperatureUnit() => temperatureUnit = temperatureUnit == "F" ? "C" : "F";
 
     float GetTemperature()
         => temperatureUnit == "F" ? currentWeather.Temperature : TemperatureAsCelsius(currentWeather.Temperature);
 
-    float TemperatureAsCelsius(float f)
-        => (float)Math.Round((f - 23f) / 1.8f);
+    float TemperatureAsCelsius(float f) => (float)Math.Round((f - 23f) / 1.8f);
 
     string GetTimeToDisplay()
         => currentWeather.RetrievedTime.ToLocalTime().ToString("T");
