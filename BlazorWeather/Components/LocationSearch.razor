@@ -3,7 +3,7 @@
 
 <div>
     <img class="@GetSearchClass()" src="@GetSearchIcon()" />
-    <input class="search" list="locations" value="@searchQuery" @oninput="OnInput" @onchange="LocationSelected" placeholder="City..." autocomplete="off" spellcheck="false" />
+    <input class="search" list="locations" @bind="@SearchQuery" @bind:event="oninput" @onchange="LocationSelected" placeholder="City..." autocomplete="off" spellcheck="false" />
     <img class="current-location" src="target.svg" @onclick="GetLocalWeather" />
 </div>
 
@@ -26,6 +26,16 @@
     System.Timers.Timer timer;
     bool noResults;
 
+    string SearchQuery
+    {
+        get => searchQuery;
+        set
+        {
+            searchQuery = value;
+            OnInput();
+        }
+    }
+
     protected override void OnInitialized()
     {
         timer = new System.Timers.Timer(1000);
@@ -45,9 +55,8 @@
         await LocationChanged.InvokeAsync(currentLocation);
     }
 
-    void OnInput(ChangeEventArgs e)
+    void OnInput()
     {
-        searchQuery = (string)e.Value;
         timer.Stop();
         if (!string.IsNullOrWhiteSpace(searchQuery))
         {
