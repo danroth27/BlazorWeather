@@ -272,7 +272,7 @@ h3 {
     left: 0;
     height: 15px;
     width: 15px;
-    background-image: url(pin.svg);
+    background-image: url(../icons/pin.svg);
     background-repeat: no-repeat;
     background-size: contain;
     transform: rotate(90deg)

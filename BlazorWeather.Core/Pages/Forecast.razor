@@ -24,8 +24,8 @@
                 <img src="@GetCurrentLocationImage()" />
                 @if (ShowPinnedLocations())
                 {
-                    <img class="previous" src="icons/caret-left.svg" @onclick="PreviousPinnedLocation" alt="Previous pinned location" />
-                    <img class="next" src="icons/caret-right.svg" @onclick="NextPinnedLocation" alt="Next pinned location" />
+                    <img class="previous" src="_content/BlazorWeather.Core/icons/caret-left.svg" @onclick="PreviousPinnedLocation" alt="Previous pinned location" />
+                    <img class="next" src="_content/BlazorWeather.Core/icons/caret-right.svg" @onclick="NextPinnedLocation" alt="Next pinned location" />
                 }
             </div>
 
@@ -158,9 +158,9 @@
             case "MO":
             case "IL":
             case "HI":
-                return $"images/locations/{currentLocation.AdministrativeArea.ID}.png";
+                return $"_content/BlazorWeather.Core/images/locations/{currentLocation.AdministrativeArea.ID}.png";
             default:
-                return "images/locations/wa.png";
+                return "_content/BlazorWeather.Core/images/locations/wa.png";
         }
     }
 

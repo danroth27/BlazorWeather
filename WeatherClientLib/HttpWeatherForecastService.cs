@@ -16,12 +16,14 @@ namespace WeatherClientLib
     public class HttpWeatherForecastService : IWeatherForecastService
     {
         private readonly HttpClient _httpClient;
-        private readonly IConfiguration _configuration;
+        private string apiKey;
 
         public HttpWeatherForecastService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
-            _configuration = configuration;
+            _httpClient.BaseAddress = new Uri("https://dataservice.accuweather.com/");
+
+            apiKey = configuration["accuweathertoken"];
         }
 
         public async Task<Location[]> GetLocationsByText(string search)
@@ -60,6 +62,6 @@ namespace WeatherClientLib
             return (weather, expires);
         }
 
-        string GetApiKey() => $"apikey={_configuration["accuweathertoken"]}";
+        string GetApiKey() => $"apikey={apiKey}";
     }
 }

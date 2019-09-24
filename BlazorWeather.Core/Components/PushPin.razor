@@ -1,0 +1,15 @@
+﻿<label class="pushpin-container">@Label
+    <input type="checkbox" checked="@IsChecked" @onchange="IsCheckedChanged" />
+    <span class="pushpin"></span>
+</label>
+
+@code {
+    [Parameter]
+    public string Label { get; set; }
+
+    [Parameter]
+    public bool IsChecked { get; set; }
+
+    [Parameter]
+    public EventCallback<ChangeEventArgs> IsCheckedChanged { get; set; }
+}

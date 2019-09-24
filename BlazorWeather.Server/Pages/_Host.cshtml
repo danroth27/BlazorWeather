@@ -1,0 +1,22 @@
+﻿@page "/"
+@namespace BlazorWeather.Server.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlazorWeather.Server</title>
+    <base href="~/" />
+    <link href="_content/BlazorWeather.Core/css/weather.css" rel="stylesheet" />
+    <script src="_content/AspNetMonsters.Blazor.Geolocation/Location.js"></script>
+</head>
+<body>
+    <app>
+        @(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
+    </app>
+
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>

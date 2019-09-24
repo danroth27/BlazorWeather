@@ -5,7 +5,7 @@
 <div>
     <img class="@GetSearchClass()" src="@GetSearchIcon()" />
     <input class="search" list="locations" @bind="@SearchQuery" @bind:event="oninput" @onchange="LocationSelected" placeholder="US city..." autocomplete="off" spellcheck="false" />
-    <img class="current-location" src="icons/target.svg" @onclick="GetLocalWeather" />
+    <img class="current-location" src="_content/BlazorWeather.Core/icons/target.svg" @onclick="GetLocalWeather" />
 </div>
 
 <datalist id="locations">
@@ -101,5 +101,5 @@
 
     string GetSearchClass() => IsSearching ? "search-icon spinning" : "search-icon";
 
-    string GetSearchIcon() => IsSearching ? "icons/loop-circular.svg" : "icons/magnifying-glass.svg";
+    string GetSearchIcon() => IsSearching ? "_content/BlazorWeather.Core/icons/loop-circular.svg" : "_content/BlazorWeather.Core/icons/magnifying-glass.svg";
 }
