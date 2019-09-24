@@ -283,14 +283,19 @@ h3 {
     transform: none;
 }
 
+.pinnable-location {
+    position: relative;
+}
+
 .pinnable-location h1 {
     display: inline-block;
 }
 
 .pinnable-location .pushpin-container {
-    vertical-align: middle;
-    float: right;
-    margin-top: 5px;  
+    position: absolute;
+    top: 0.4rem;
+    left: 100%;
+    margin-left: 0.5rem;
 }
 
 .current-location {
