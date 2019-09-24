@@ -2,7 +2,15 @@
 
 A Blazor Weather sample app that shows the current weather for your current location and a collection of pinned locations.
 
-The weather is supplied by [Accuweather](https://www.accuweather.com/).
+## Setup
+
+You'll need an Accuweather API key to use their services. You can sign up for a free trial - just be aware it's only good for 50 requests/day. 
+
+To setup the API key in the Blazor WebAssembly app, run the app and the run `localStorage.setItem("accuweathertoken", "\"**YOUR TOKEN**\"")` in the browser dev console. Clear the API key from local storage when you're done with it
+
+## Credits
+
+The weather is supplied by [Accuweather](https://www.accuweather.com/). 
 
 Geolocation is handled using [Blazor.Geolocation](https://github.com/AspNetMonsters/Blazor.Geolocation).
 
