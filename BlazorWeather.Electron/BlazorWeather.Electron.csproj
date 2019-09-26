@@ -10,7 +10,7 @@
     <RazorLangVersion>3.0</RazorLangVersion>
     <RestoreAdditionalProjectSources>
       $(RestoreAdditionalProjectSources);
-      .\packages;
+      ..\packages;
     </RestoreAdditionalProjectSources>
     <RootNamespace>BlazorWeather</RootNamespace>
     <UserSecretsId>9cad57ae-e4dd-44d9-92ff-49253148f1eb</UserSecretsId>
