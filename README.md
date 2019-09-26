@@ -4,7 +4,7 @@ A Blazor Weather sample app that shows the current weather for your current loca
 
 ## Setup
 
-You'll need an Accuweather API key to use their services. You can sign up for a free trial - just be aware it's only good for 50 requests/day. 
+You'll need an [Accuweather API key](https://developer.accuweather.com/) to use their services. You can sign up for a free trial - just be aware it's only good for 50 requests/day. 
 
 To setup the API key in the Blazor WebAssembly app during development, run the app and the run `localStorage.setItem("accuweathertoken", "\"**YOUR TOKEN**\"")` in the browser dev console. Clear the API key from local storage when you're done with it
 
