@@ -59,7 +59,6 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        Console.WriteLine(nameof(OnAfterRenderAsync));
         if (firstRender)
         {
             pinnedLocations = await PinnedLocationsService.LoadPinnedLocations();

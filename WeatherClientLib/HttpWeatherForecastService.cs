@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,9 +24,11 @@ namespace WeatherClientLib
             apiKey = configuration["accuweathertoken"];
         }
 
-        public async Task<Location[]> GetLocationsByText(string search)
+        public async Task<Location[]> GetLocationsByText(string search, CancellationToken cancellationToken)
         {
-            return await JsonSerializer.DeserializeAsync<Location[]>(await _httpClient.GetStreamAsync($"locations/v1/cities/US/search?{GetApiKey()}&q={search}"));
+            using var response = await _httpClient.GetAsync($"locations/v1/cities/US/autocomplete?{GetApiKey()}&q={search}", cancellationToken);
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+            return await JsonSerializer.DeserializeAsync<Location[]>(responseStream, cancellationToken: cancellationToken);
         }
 
         public async Task<Location> GetLocationByGeolocation(decimal latitude, decimal longitude)

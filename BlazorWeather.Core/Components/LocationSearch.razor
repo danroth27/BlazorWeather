@@ -15,10 +15,12 @@
     }
 </datalist>
 
+<p>
 @if (noResults)
 {
-    <p>No results.</p>
+    <span>No results.</span>
 }
+</p>
 
 @code {
     string searchQuery;
@@ -62,13 +64,13 @@
             noResults = false;
             currentSearchCts?.Cancel();
             currentSearchCts = new CancellationTokenSource();
-            var thisSearchToken = currentSearchCts.Token;
+            var cancellationToken = currentSearchCts.Token;
 
             await Task.Delay(500);
-            if (!thisSearchToken.IsCancellationRequested)
+            if (!cancellationToken.IsCancellationRequested)
             {
-                var results = await WeatherForecastService.GetLocationsByText(query);
-                if (!thisSearchToken.IsCancellationRequested)
+                var results = await WeatherForecastService.GetLocationsByText(query, cancellationToken);
+                if (!cancellationToken.IsCancellationRequested)
                 {
                     locations = results;
                     noResults = locations.Length == 0;
@@ -78,6 +80,7 @@
 
             StateHasChanged();
         }
+        catch (OperationCanceledException) { }
         catch (Exception ex)
         {
             Console.Error.WriteLine(ex.StackTrace);
