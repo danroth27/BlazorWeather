@@ -9,7 +9,7 @@ namespace WeatherClientLib
     {
         Task<Location> GetLocationByGeolocation(decimal latitude, decimal longitude);
 
-        Task<Location[]> GetLocationsByText(string search);
+        Task<Location[]> GetLocationsByText(string search, CancellationToken cancellationToken);
 
         IAsyncEnumerable<WeatherResponse> GetStreamingWeather(string locationKey, CancellationToken token);
 
