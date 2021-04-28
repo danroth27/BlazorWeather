@@ -31,7 +31,7 @@ namespace WeatherClientLib
             return await JsonSerializer.DeserializeAsync<Location[]>(responseStream, cancellationToken: cancellationToken);
         }
 
-        public async Task<Location> GetLocationByGeolocation(decimal latitude, decimal longitude)
+        public async Task<Location> GetLocationByGeolocation(double latitude, double longitude)
         {
             return await JsonSerializer.DeserializeAsync<Location>(await _httpClient.GetStreamAsync($"locations/v1/cities/geoposition/search?{GetApiKey()}&q={latitude},{longitude}"));
         }

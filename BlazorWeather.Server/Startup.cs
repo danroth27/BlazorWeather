@@ -2,16 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WeatherClientLib;
-using GeolocationService = AspNetMonsters.Blazor.Geolocation.LocationService;
 
 namespace BlazorWeather.Server
 {
@@ -30,11 +26,7 @@ namespace BlazorWeather.Server
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddHttpClient<IWeatherForecastService, HttpWeatherForecastService>();
-
-            services.AddScoped<GeolocationService>();
-            services.AddBlazoredLocalStorage();
-            services.AddScoped<PinnedLocationsService>();
+            services.AddBlazorWeather();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

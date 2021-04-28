@@ -7,7 +7,7 @@ namespace WeatherClientLib
 {
     public interface IWeatherForecastService
     {
-        Task<Location> GetLocationByGeolocation(decimal latitude, decimal longitude);
+        Task<Location> GetLocationByGeolocation(double latitude, double longitude);
 
         Task<Location[]> GetLocationsByText(string search, CancellationToken cancellationToken);
 
