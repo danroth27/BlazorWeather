@@ -1,45 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
-    <RootNamespace>BlazorWeather.Maui</RootNamespace>
-    <ApplicationManifest>Windows\app.manifest</ApplicationManifest>
-    <Platforms>x86;x64;arm64</Platforms>
-    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
-		<EnableDefaultPageItems>False</EnableDefaultPageItems>
-		<EnableDefaultApplicationDefintition>False</EnableDefaultApplicationDefintition>
-    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <TargetFrameworks>net6.0-maccatalyst</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <SingleProject>true</SingleProject>
+    <ApplicationTitle>BlazorWeather.Maui</ApplicationTitle>
+    <ApplicationId>com.microsoft.blazorweather</ApplicationId>
+    <ApplicationVersion>1.0</ApplicationVersion>
+    <AndroidVersionCode>1</AndroidVersionCode>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-ios'">iossimulator-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
+    <InvariantGlobalization Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">true</InvariantGlobalization>
   </PropertyGroup>
-
-	<ItemGroup>
-    <ApplicationDefinition Include="Windows\App.xaml" Visible="true">
-      <Generator>MSBuild:Compile</Generator>
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </ApplicationDefinition>
-	</ItemGroup>
-  
   <ItemGroup>
+    <PackageReference Include="Microsoft.Maui" Version="6.0.100-preview.4.462" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="6.0.100-preview.4.462" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="6.0.100-preview.4.469" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.0-preview.4.21227.6" />
-    <PackageReference Include="Microsoft.ProjectReunion" Version="[0.5.6]">
-      <IncludeAssets>build</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Maui" Version="6.0.100-preview.4.469" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="6.0.100-preview.4.469" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="6.0.100-preview.4.469" />
-    <PackageReference Include="Microsoft.Maui.Resizetizer" Version="6.0.100-preview.4.469" />
   </ItemGroup>
-
   <ItemGroup>
-    <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.19041.16" />
-    <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.19041.16" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <MauiImage Include="Resources\AppIcons\**\*.svg" Link="Resources\AppIcons\%(RecursiveDir)%(FileName)%(Extension)" />
-    <MauiImage Include="Resources\Images\**\*.svg" Link="Resources\Images\%(RecursiveDir)%(FileName)%(Extension)" />
-    <MauiFont Include="Resources\Fonts\**\*.ttf" Link="Resources\Fonts\%(RecursiveDir)%(FileName)%(Extension)" />
+    <MauiImage Include="Resources\AppIcons\appicon.svg" ForegroundFile="Resources\AppIcons\appiconfg.svg" IsAppIcon="true" />
+   <MauiSplashScreen Include="Resources\AppIcons\appiconfg.svg" Color="#512BD4" />
+    <MauiImage Include="Resources\Images\*" />
+    <MauiFont Include="Resources\Fonts\*" />
   </ItemGroup>
   
   <ItemGroup>
@@ -57,14 +39,4 @@
     <EmbeddedResource Include="wwwroot\index.html" />
     <EmbeddedResource Include="wwwroot\css\app.css" />
   </ItemGroup>
-  
-  <Target Name="RemoveExtraPriFiles" BeforeTargets="AddPriPayloadFilesToCopyToOutputDirectoryItems">
-    <ItemGroup>
-      <PriToDelete Include="$(NuGetPackageRoot)\**\Microsoft.AspNetCore.Components.WebView.Maui.pri" />
-    </ItemGroup>
-    <ItemGroup>
-      <_ReferenceRelatedPaths Remove="@(PriToDelete)" />
-      <ReferenceCopyLocalPaths Remove="@(PriToDelete)" />
-    </ItemGroup>
-  </Target>
 </Project>

@@ -28,7 +28,7 @@ namespace BlazorWeather.Maui
                 Services = serviceCollection.BuildServiceProvider(),
             };
 
-            var componentType = Type.GetType("BlazorWeather.Maui.Main");
+            var componentType = Type.GetType("BlazorWeather.Maui.Main") ?? Type.GetType("BlazorWeather.Maui.WinUI3.Main");
             blazorWebView.RootComponents.Add(new RootComponent { Selector = "#app", ComponentType = componentType, });
 
             Content = blazorWebView;
