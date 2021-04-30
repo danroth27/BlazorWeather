@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWeather.Maui.WinUI3",
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "BlazorWeather.Maui.WinUI3 (Package)", "BlazorWeather.Maui.WinUI3 (Package)\BlazorWeather.Maui.WinUI3 (Package).wapproj", "{A88FCF8C-EC35-4623-B126-C591EEF99C70}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWeather2021.Client", "BlazorWeather2021.Client\BlazorWeather2021.Client.csproj", "{C7E9EFA3-B797-4A97-92AA-D1E99607E237}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWeather2021.Server", "BlazorWeather2021.Server\BlazorWeather2021.Server.csproj", "{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -178,6 +182,38 @@ Global
 		{A88FCF8C-EC35-4623-B126-C591EEF99C70}.Release|x86.ActiveCfg = Release|x86
 		{A88FCF8C-EC35-4623-B126-C591EEF99C70}.Release|x86.Build.0 = Release|x86
 		{A88FCF8C-EC35-4623-B126-C591EEF99C70}.Release|x86.Deploy.0 = Release|x86
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Debug|arm64.Build.0 = Debug|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Debug|x64.Build.0 = Debug|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Debug|x86.Build.0 = Debug|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Release|arm64.ActiveCfg = Release|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Release|arm64.Build.0 = Release|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Release|x64.ActiveCfg = Release|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Release|x64.Build.0 = Release|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Release|x86.ActiveCfg = Release|Any CPU
+		{C7E9EFA3-B797-4A97-92AA-D1E99607E237}.Release|x86.Build.0 = Release|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Debug|arm64.Build.0 = Debug|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Debug|x64.Build.0 = Debug|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Debug|x86.Build.0 = Debug|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Release|arm64.ActiveCfg = Release|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Release|arm64.Build.0 = Release|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Release|x64.ActiveCfg = Release|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Release|x64.Build.0 = Release|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Release|x86.ActiveCfg = Release|Any CPU
+		{D95183C5-8B1F-4BFE-971A-1F22EB6BD89E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
