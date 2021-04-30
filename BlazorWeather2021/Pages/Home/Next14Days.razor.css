@@ -1,0 +1,9 @@
+.temperature-gradient {
+    background: linear-gradient(180deg, #7014E8 0%, rgba(73, 49, 222, 0) 100%);
+    border-radius: 5px;
+}
+
+.rain {
+    color: #91A7B7;
+    border-color: #91A7B7;
+}

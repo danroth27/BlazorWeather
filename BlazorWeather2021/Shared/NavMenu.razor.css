@@ -1,0 +1,21 @@
+nav {
+    background-color: var(--mid-background);
+    z-index: 1;
+}
+
+::deep a {
+    color: #637989;
+    display: block;
+}
+
+::deep a:hover {
+    color: white;
+}
+
+::deep a.active {
+    color: #F7B548;
+}
+
+svg {
+    width: 2rem;
+}

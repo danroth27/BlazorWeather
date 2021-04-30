@@ -1,0 +1,31 @@
+.desktop h3, .desktop .right-col {
+    border-color: #152C39;
+}
+
+.desktop h3 {
+    background-color: var(--dark-background);
+    z-index: 1;
+}
+
+.winds {
+    color: #91A7B7;
+}
+
+.compass-pointer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: -20px;
+}
+
+.compass-pointer svg {
+    animation: 2s infinite ease-in-out compass-pointer-wobble;
+}
+
+@keyframes compass-pointer-wobble {
+    0% { transform: rotate(-28deg) }
+    50% { transform: rotate(-22deg) }
+    100% { transform: rotate(-28deg) }
+}
