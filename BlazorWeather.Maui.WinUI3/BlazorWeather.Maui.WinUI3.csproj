@@ -68,6 +68,12 @@
   <ItemGroup>
     <ProjectReference Include="..\BlazorWeather2021\BlazorWeather2021.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="Resources\trayicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <Target Name="RemoveExtraPriFiles" BeforeTargets="AddPriPayloadFilesToCopyToOutputDirectoryItems">
     <ItemGroup>

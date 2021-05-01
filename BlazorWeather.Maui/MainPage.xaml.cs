@@ -27,10 +27,26 @@ namespace BlazorWeather.Maui
                 Services = serviceCollection.BuildServiceProvider(),
             };
 
-            var componentType = Type.GetType("BlazorWeather.Maui.Main") ?? Type.GetType("BlazorWeather.Maui.WinUI3.Main");
+            var componentType = Type.GetType("BlazorWeather.Maui.Main")
+                ?? Type.GetType("BlazorWeather.Maui.WinUI3.Main");
             blazorWebView.RootComponents.Add(new RootComponent { Selector = "#app", ComponentType = componentType, });
 
             Content = blazorWebView;
+
+            SetupTrayIcon();
+        }
+
+        private void SetupTrayIcon()
+        {
+            var trayService = ServiceProvider.GetService<ITrayService>();
+
+            if (trayService != null)
+            {
+                trayService.Initialize();
+                trayService.ClickHandler = () => 
+                    ServiceProvider.GetService<INotificationService>()
+                        ?.ShowNotification("Tray Clicked");
+            }
         }
     }
 }

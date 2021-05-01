@@ -3,6 +3,7 @@ using Microsoft.Maui.Hosting;
 using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.LifecycleEvents;
 using Microsoft.AspNetCore.Components.WebView.Maui;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorWeather.Maui
 {
@@ -14,6 +15,15 @@ namespace BlazorWeather.Maui
 				.UseFormsCompatibility()
 				.RegisterBlazorMauiWebView()
 				.UseMauiApp<App>()
+				.ConfigureServices(services =>
+				{
+#if WINDOWS
+					services.AddSingleton<ITrayService, Windows.TrayService>();
+					services.AddSingleton<INotificationService, Windows.NotificationService>();
+#elif MACCATALYST
+					//services.AddSingleton<ITrayService, MacCatalyst.TrayService>();
+#endif
+				})
 				.ConfigureFonts(fonts => {
 					fonts.AddFont("ionicons.ttf", "IonIcons");
 				})

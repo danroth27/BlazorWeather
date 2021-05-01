@@ -6,9 +6,9 @@
         <ResourceDictionary>
 
             <!-- Add any additional resources here. -->
-            <Color x:Key="PageBackgroundColor">White</Color>
+            <Color x:Key="PageBackgroundColor">#FFFFFF</Color>
 
-            <Color x:Key="PrimaryTextColor">Black</Color>
+            <Color x:Key="PrimaryTextColor">#000000</Color>
 
             <Color x:Key="GlyphColor">#2B0B98</Color>
 
