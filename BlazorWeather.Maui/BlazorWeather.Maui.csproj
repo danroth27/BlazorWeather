@@ -11,19 +11,25 @@
     <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
     <InvariantGlobalization Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">true</InvariantGlobalization>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui" Version="6.0.100-preview.4.462" />
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="6.0.100-preview.4.462" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="6.0.100-preview.4.469" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.0-preview.4.21227.6" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorWeather2021\BlazorWeather2021.csproj" />
+  </ItemGroup>
+
   <ItemGroup>
     <MauiImage Include="Resources\AppIcons\appicon.svg" ForegroundFile="Resources\AppIcons\appiconfg.svg" IsAppIcon="true" />
-   <MauiSplashScreen Include="Resources\AppIcons\appiconfg.svg" Color="#512BD4" />
+    <MauiSplashScreen Include="Resources\AppIcons\appiconfg.svg" Color="#512BD4" />
     <MauiImage Include="Resources\Images\*" />
     <MauiFont Include="Resources\Fonts\*" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Content Remove="**\*.razor" />
   </ItemGroup>
@@ -32,11 +38,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\index.html" />
-    <Content Remove="wwwroot\css\app.css" />
+    <Content Remove="wwwroot\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="wwwroot\index.html" />
-    <EmbeddedResource Include="wwwroot\css\app.css" />
+    <EmbeddedResource Include="wwwroot\**\*" />
   </ItemGroup>
+
 </Project>

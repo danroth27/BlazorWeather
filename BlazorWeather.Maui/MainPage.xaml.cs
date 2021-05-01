@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.WebView.Maui;
+﻿using BlazorWeather2021;
+using Microsoft.AspNetCore.Components.WebView.Maui;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
@@ -17,13 +18,11 @@ namespace BlazorWeather.Maui
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddBlazorWebView();
+            serviceCollection.AddBlazorWeather();
 
             var blazorWebView = new BlazorWebView()
             {
-                BackgroundColor = Colors.Orange,
-                HeightRequest = 200,
-                MinimumHeightRequest = 200,
-
+                VerticalOptions = LayoutOptions.FillAndExpand,
                 HostPage = @"wwwroot/index.html",
                 Services = serviceCollection.BuildServiceProvider(),
             };

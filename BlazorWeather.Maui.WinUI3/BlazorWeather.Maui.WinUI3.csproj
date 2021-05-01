@@ -56,14 +56,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\index.html" />
-    <Content Remove="wwwroot\css\app.css" />
+    <Content Remove="wwwroot\**\*" />
   </ItemGroup>
   <ItemGroup>
 		<Compile Include="..\BlazorWeather.Maui\*.cs" Link="%(FileName)%(Extension)" />
 		<EmbeddedResource Include="..\BlazorWeather.Maui\*.xaml" Link="%(FileName)%(Extension)" />
-    <EmbeddedResource Include="..\BlazorWeather.Maui\wwwroot\index.html" Link="wwwroot\%(FileName)%(Extension)" />
-    <EmbeddedResource Include="..\BlazorWeather.Maui\wwwroot\css\app.css" Link="wwwroot\css\%(FileName)%(Extension)" />
+    <EmbeddedResource Include="..\BlazorWeather.Maui\wwwroot\*" Link="wwwroot\%(FileName)%(Extension)" />
+    <EmbeddedResource Include="..\BlazorWeather.Maui\wwwroot\css\*" Link="wwwroot\css\%(FileName)%(Extension)" />
+    <EmbeddedResource Include="..\BlazorWeather.Maui\wwwroot\weather-icons\*" Link="wwwroot\weather-icons\%(FileName)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorWeather2021\BlazorWeather2021.csproj" />
   </ItemGroup>
 
   <Target Name="RemoveExtraPriFiles" BeforeTargets="AddPriPayloadFilesToCopyToOutputDirectoryItems">

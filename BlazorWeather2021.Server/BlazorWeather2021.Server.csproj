@@ -8,8 +8,4 @@
     <ProjectReference Include="..\BlazorWeather2021\BlazorWeather2021.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
 </Project>
