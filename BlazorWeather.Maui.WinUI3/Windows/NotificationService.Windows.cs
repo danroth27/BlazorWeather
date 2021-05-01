@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WeatherTwentyOne.Services;
+using Microsoft.Maui;
 
 namespace BlazorWeather.Maui.Windows
 {
