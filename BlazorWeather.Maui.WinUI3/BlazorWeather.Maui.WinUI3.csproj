@@ -7,22 +7,22 @@
     <ApplicationManifest>Windows\app.manifest</ApplicationManifest>
     <Platforms>x86;x64;arm64</Platforms>
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
-		<EnableDefaultPageItems>False</EnableDefaultPageItems>
-		<EnableDefaultApplicationDefintition>False</EnableDefaultApplicationDefintition>
+    <EnableDefaultPageItems>False</EnableDefaultPageItems>
+    <EnableDefaultApplicationDefintition>False</EnableDefaultApplicationDefintition>
     <GenerateEmbeddedFilesManifest>True</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
 
-	<ItemGroup>
-		<Manifest Include="$(ApplicationManifest)" />
-		<ApplicationDefinition Include="Windows\WindowsApp.xaml">
-			<Generator>MSBuild:Compile</Generator>
-			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-		</ApplicationDefinition>
-		<Page Include="Windows\*.xaml" Exclude="Windows\WindowsApp.xaml">
-			<Generator>MSBuild:Compile</Generator>
-			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-		</Page>
-	</ItemGroup>
+  <ItemGroup>
+    <Manifest Include="$(ApplicationManifest)" />
+    <ApplicationDefinition Include="Windows\WindowsApp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </ApplicationDefinition>
+    <Page Include="Windows\*.xaml" Exclude="Windows\WindowsApp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="6.0.100-preview.4.469" />
@@ -32,8 +32,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Maui" Version="6.0.100-preview.4.469" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="6.0.100-preview.4.469" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="6.0.100-preview.4.469" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="6.0.100-preview.4.469" />
     <PackageReference Include="Microsoft.Maui.Resizetizer" Version="6.0.100-preview.4.469" />
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.1" />
+    <PackageReference Include="PInvoke.User32" Version="0.7.104" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,22 +53,29 @@
     <Content Remove="**\*.razor" />
   </ItemGroup>
   <ItemGroup>
-		<RazorComponent Include="..\BlazorWeather.Maui\*.razor" Link="%(FileName)%(Extension)" />
-		<RazorComponent Include="..\BlazorWeather.Maui\Pages\*.razor" Link="Pages\%(FileName)%(Extension)" />
+    <RazorComponent Include="..\BlazorWeather.Maui\*.razor" Link="%(FileName)%(Extension)" />
+    <RazorComponent Include="..\BlazorWeather.Maui\Pages\*.razor" Link="Pages\%(FileName)%(Extension)" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="wwwroot\**\*" />
   </ItemGroup>
   <ItemGroup>
-		<Compile Include="..\BlazorWeather.Maui\*.cs" Link="%(FileName)%(Extension)" />
-		<EmbeddedResource Include="..\BlazorWeather.Maui\*.xaml" Link="%(FileName)%(Extension)" />
+    <Compile Include="..\BlazorWeather.Maui\*.cs" Link="%(FileName)%(Extension)" />
+    <Compile Include="..\BlazorWeather.Maui\Services\*.cs" Link="Services\%(FileName)%(Extension)" />
+    <EmbeddedResource Include="..\BlazorWeather.Maui\*.xaml" Link="%(FileName)%(Extension)" />
     <EmbeddedResource Include="..\BlazorWeather.Maui\wwwroot\*" Link="wwwroot\%(FileName)%(Extension)" />
     <EmbeddedResource Include="..\BlazorWeather.Maui\wwwroot\css\*" Link="wwwroot\css\%(FileName)%(Extension)" />
     <EmbeddedResource Include="..\BlazorWeather.Maui\wwwroot\weather-icons\*" Link="wwwroot\weather-icons\%(FileName)%(Extension)" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlazorWeather2021\BlazorWeather2021.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="Windows\Resources\trayicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <Target Name="RemoveExtraPriFiles" BeforeTargets="AddPriPayloadFilesToCopyToOutputDirectoryItems">
