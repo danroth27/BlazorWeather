@@ -2,6 +2,6 @@
 {
 	public interface INotificationService
 	{
-		void ShowNotification(string title);
+		void ShowNotification(string title, string subtitle, string body);
 	}
 }
