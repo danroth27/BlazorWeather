@@ -10,6 +10,7 @@
     <EnableDefaultPageItems>False</EnableDefaultPageItems>
     <EnableDefaultApplicationDefintition>False</EnableDefaultApplicationDefintition>
     <GenerateEmbeddedFilesManifest>True</GenerateEmbeddedFilesManifest>
+    <UserSecretsId>6da98b65-8ce9-42d6-b26b-84b7c4b3051a</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,6 +28,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="6.0.100-preview.4.469" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.0-preview.4.21227.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0-preview.4.21222.10" />
     <PackageReference Include="Microsoft.ProjectReunion" Version="[0.5.6]">
       <IncludeAssets>build</IncludeAssets>
     </PackageReference>

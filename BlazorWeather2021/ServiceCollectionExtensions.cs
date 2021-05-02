@@ -12,9 +12,9 @@ namespace BlazorWeather2021
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddBlazorWeather(this IServiceCollection services)
+        public static IServiceCollection AddBlazorWeather(this IServiceCollection services, string baseUri)
         {
-            services.AddHttpClient<IWeatherService, WeatherService>();
+            services.AddHttpClient<IWeatherService, WeatherService>(httpClient => httpClient.BaseAddress = new Uri(baseUri));
             services.AddScoped<IGeolocationService, GeolocationService>();
             services.AddBlazoredLocalStorage();
             services.AddScoped<PinnedLocationsService>();

@@ -1,5 +1,6 @@
 ﻿using BlazorWeather2021;
 using Microsoft.AspNetCore.Components.WebView.Maui;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
@@ -16,9 +17,13 @@ namespace BlazorWeather.Maui
         {
             InitializeComponent();
 
+            var configBuilder = new ConfigurationBuilder();
+            configBuilder.AddUserSecrets(this.GetType().Assembly);
+            var config = configBuilder.Build();
+
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddBlazorWebView();
-            serviceCollection.AddBlazorWeather();
+            serviceCollection.AddBlazorWeather(config["WeatherBaseUri"]);
 
             var blazorWebView = new BlazorWebView()
             {
@@ -45,7 +50,7 @@ namespace BlazorWeather.Maui
                 trayService.Initialize();
                 trayService.ClickHandler = () => 
                     ServiceProvider.GetService<INotificationService>()
-                        ?.ShowNotification("Tray Clicked");
+                        ?.ShowNotification("Tray Clicked", "Great job!", "Just letting you know you clicked the tray.");
             }
         }
     }
