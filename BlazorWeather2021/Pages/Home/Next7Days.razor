@@ -2,9 +2,16 @@
 <div class="px-6 mb-8 grid items-center" style="grid-template-columns: 1fr 1.5fr min-content min-content">
     @for (var i = 0; i < 7; i++)
     {
-        <div>Monday</div>
-        <div><img class="w-5 m-2" src="_content/BlazorWeather2021/weather-icons/cloud-sun.svg" /></div>
-        <div class="mr-3">24˚</div>
-        <div class="text-accent-blue-200">14˚</div>
+        var forecast = DailyForecasts[i];
+
+        <div>@forecast.DateTime.DayOfWeek</div>
+        <div><img class="w-5 m-2" src="@forecast.GetIconUrl()" /></div>
+        <div class="mr-3">@forecast.Temperature.Maximum</div>
+        <div class="text-accent-blue-200">@forecast.Temperature.Minimum</div>
     }
 </div>
+
+@code {
+    [Parameter]
+    public FullDayForecast[] DailyForecasts { get; set; }
+}

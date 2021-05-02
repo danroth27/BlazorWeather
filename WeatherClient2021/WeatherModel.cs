@@ -9,7 +9,7 @@ namespace WeatherClient2021
     {
         public WeatherSnapshot CurrentWeather { get; set; }
         public WeatherSnapshot[] HourlyForecasts { get; set; }
-        public WeatherSnapshot[] DailyForecasts { get; set; }
+        public FullDayForecast[] DailyForecasts { get; set; }
     }
 
     public class WeatherSnapshot
@@ -17,6 +17,7 @@ namespace WeatherClient2021
         public DateTimeOffset DateTime { get; set; }
         public string Phrase { get; set; }
         public Temperature Temperature { get; set; }
+        public int ChanceOfPercipitation { get; } = new Random().Next(0, 100);
 
         public DateTimeOffset Date
         {
@@ -33,6 +34,7 @@ namespace WeatherClient2021
     {
         public double Value { get; set; }
         public string Unit { get; set; }
+        public override string ToString() => $"{Value}˚{Unit}";
     }
 
     public class MinMaxTemperature
@@ -58,6 +60,8 @@ namespace WeatherClient2021
 
         public PhraseOnly Day { get; set; }
         public PhraseOnly Night { get; set; }
+
+        public int ChanceOfPercipitation { get; } = new Random().Next(0, 100);
 
         public DateTimeOffset Date
         {
