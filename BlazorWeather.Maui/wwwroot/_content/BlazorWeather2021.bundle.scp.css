@@ -1,0 +1,156 @@
+@import '';
+
+/* _content/BlazorWeather2021/Pages/Favorites/Favorites.razor.rz.scp.css */
+.grid[b-94j5n3mwyr] {
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    grid-auto-rows: 1fr;
+}
+
+@media (min-width: 768px) {
+    .grid[b-94j5n3mwyr] {
+        grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    }
+}
+
+.stat-box[b-94j5n3mwyr] {
+    background-color: var(--mid-background);
+    aspect-ratio: 1;
+    max-width: 11rem;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+}
+
+.stat-source[b-94j5n3mwyr] {
+    color: #91A7B7;
+}
+
+a[b-94j5n3mwyr] {
+    color: #637989;
+}
+
+a:hover[b-94j5n3mwyr] {
+    color: white;
+}
+/* _content/BlazorWeather2021/Pages/Home/Home.razor.rz.scp.css */
+.desktop h3[b-cgs33b3v3l], .desktop .right-col[b-cgs33b3v3l] {
+    border-color: #152C39;
+}
+
+.desktop h3[b-cgs33b3v3l] {
+    background-color: var(--dark-background);
+    z-index: 1;
+}
+
+.winds[b-cgs33b3v3l] {
+    color: #91A7B7;
+}
+
+.compass-pointer[b-cgs33b3v3l] {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: -20px;
+}
+
+.compass-pointer svg[b-cgs33b3v3l] {
+    animation: 2s infinite ease-in-out compass-pointer-wobble-b-cgs33b3v3l;
+}
+
+@keyframes compass-pointer-wobble-b-cgs33b3v3l {
+    0% { transform: rotate(-28deg) }
+    50% { transform: rotate(-22deg) }
+    100% { transform: rotate(-28deg) }
+}
+/* _content/BlazorWeather2021/Pages/Home/Next14Days.razor.rz.scp.css */
+.temperature-gradient[b-nlww04gcqp] {
+    background: linear-gradient(180deg, #7014E8 0%, rgba(73, 49, 222, 0) 100%);
+    border-radius: 5px;
+}
+
+.rain[b-nlww04gcqp] {
+    color: #91A7B7;
+    border-color: #91A7B7;
+}
+/* _content/BlazorWeather2021/Pages/Home/StatBoxes.razor.rz.scp.css */
+.grid[b-qorhpl6y3o] {
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    grid-auto-rows: 1fr;
+}
+
+.stat-box[b-qorhpl6y3o] {
+    background-color: var(--mid-background);
+    aspect-ratio: 1;
+    max-width: 11rem;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-source[b-qorhpl6y3o] {
+    color: #91A7B7;
+}
+
+a[b-qorhpl6y3o] {
+    color: #637989;
+}
+
+a:hover[b-qorhpl6y3o] {
+    color: white;
+}
+/* _content/BlazorWeather2021/Pages/Settings/Settings.razor.rz.scp.css */
+label:hover[b-wte9vde8oz] {
+    background-color: var(--mid-background);
+}
+
+.description[b-wte9vde8oz] {
+    color: #91A7B7;
+    margin-bottom: 0.1rem;
+}
+
+label[b-wte9vde8oz] {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #91A7B7;
+    padding: 0.75rem 1rem 0.5rem 0rem;
+    cursor: pointer;
+}
+
+label > svg[b-wte9vde8oz] {
+    margin-left: auto;
+    display: none;
+}
+
+input[type=radio]:checked + div + svg[b-wte9vde8oz] {
+    display: block;
+}
+/* _content/BlazorWeather2021/Shared/MainLayout.razor.rz.scp.css */
+/* _content/BlazorWeather2021/Shared/NavMenu.razor.rz.scp.css */
+nav[b-sphds4i9k6] {
+    background-color: var(--mid-background);
+    z-index: 1;
+}
+
+[b-sphds4i9k6] a {
+    color: #637989;
+    display: block;
+}
+
+[b-sphds4i9k6] a:hover {
+    color: white;
+}
+
+[b-sphds4i9k6] a.active {
+    color: #F7B548;
+}
+
+svg[b-sphds4i9k6] {
+    width: 2rem;
+}
