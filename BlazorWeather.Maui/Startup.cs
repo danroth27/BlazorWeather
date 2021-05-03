@@ -21,7 +21,8 @@ namespace BlazorWeather.Maui
 					services.AddSingleton<ITrayService, Windows.TrayService>();
 					services.AddSingleton<INotificationService, Windows.NotificationService>();
 #elif MACCATALYST
-					//services.AddSingleton<ITrayService, MacCatalyst.TrayService>();
+                    services.AddSingleton<ITrayService, MacCatalyst.TrayService>();
+                    services.AddSingleton<INotificationService, MacCatalyst.NotificationService>();
 #endif
 				})
 				.ConfigureFonts(fonts => {
