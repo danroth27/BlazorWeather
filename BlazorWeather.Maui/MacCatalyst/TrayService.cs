@@ -60,7 +60,8 @@ namespace BlazorWeather.Maui.MacCatalyst
 			statusBarButton = Runtime.GetNSObject(IntPtr_objc_msgSend(statusBarItem.Handle, Selector.GetHandle("button")));
 			statusBarImage = Runtime.GetNSObject(IntPtr_objc_msgSend(ObjCRuntime.Class.GetHandle("NSImage"), Selector.GetHandle("alloc")));
 
-			var imgPath = System.IO.Path.Combine(NSBundle.MainBundle.BundlePath, "Contents", "trayicon.png");
+			// var imgPath = System.IO.Path.Combine(NSBundle.MainBundle.BundlePath, "Contents", "trayicon.png");
+			var imgPath = System.IO.Path.Combine(NSBundle.MainBundle.BundlePath, "Contents", "Resources", "MacCatalyst", "trayicon.png");
 			var imageFileStr = NSString.CreateNative(imgPath);
 			var nsImagePtr = IntPtr_objc_msgSend_IntPtr(statusBarImage.Handle, Selector.GetHandle("initWithContentsOfFile:"), imageFileStr);
 

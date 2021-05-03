@@ -51,4 +51,8 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">
     <BundleResource Include="MacCatalyst\trayicon.png" />
   </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">
+    <CodesignEntitlements Include="MacCatalyst\Entitlements.plist" />
+  </ItemGroup>
 </Project>
