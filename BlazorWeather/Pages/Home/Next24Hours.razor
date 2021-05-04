@@ -1,3 +1,5 @@
+@inject DisplayHelper DH
+
 <h3 class="subheading">Next 24 Hours</h3>
 <div class="flex overflow-x-scroll pb-2 px-4 scrollbar-subtle mb-10">
     @foreach (var forecast in HourlyForecasts)
@@ -5,7 +7,7 @@
         <div class="flex flex-col w-14 flex-shrink-0 items-center">
             <div class="text-xs">@forecast.DateTime.ToString("h tt")</div>
             <img class="w-5 h-5 m-2" src="@forecast.GetIconUrl()" />
-            <div>@forecast.Temperature</div>
+            <div>@DH.DisplayTemp(forecast.Temperature)</div>
         </div>
     }
 

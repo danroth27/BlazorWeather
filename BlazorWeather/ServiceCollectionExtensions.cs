@@ -1,12 +1,8 @@
-﻿using Blazored.LocalStorage;
+﻿using System;
+using Blazored.LocalStorage;
 using Darnton.Blazor.DeviceInterop.Geolocation;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WeatherClient2021;
+using WeatherClient;
 
 namespace BlazorWeather
 {
@@ -18,6 +14,8 @@ namespace BlazorWeather
             services.AddScoped<IGeolocationService, GeolocationService>();
             services.AddBlazoredLocalStorage();
             services.AddScoped<PinnedLocationsService>();
+            services.AddSingleton<AppState>();
+            services.AddSingleton<DisplayHelper>();
             return services;
         }
     }

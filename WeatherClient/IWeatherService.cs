@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace WeatherClient2021
+namespace WeatherClient
 {
     public interface IWeatherService
     {

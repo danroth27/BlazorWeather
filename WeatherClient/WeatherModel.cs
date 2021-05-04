@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace WeatherClient2021
+namespace WeatherClient
 {
     public class WeatherResponse
     {
@@ -19,7 +19,7 @@ namespace WeatherClient2021
         public Temperature Temperature { get; set; }
         public int RelativeHumidity { get; set; }
         public int? PrecipitationProbability { get; set; }
-        public int WindSpeed { get; set; } = new Random().Next(0, 40);
+        public int WindSpeed { get; set; } = new Random().Next(0, 20);
         public int WindDirection { get; set; } = new Random().Next(0, 360);
 
         public DateTimeOffset Date
@@ -124,6 +124,7 @@ namespace WeatherClient2021
     {
         public string Name { get; set; }
         public Coordinate Coordinate { get; set; }
+        public string Country { get; set; }
     }
 
     public static class WeatherStations

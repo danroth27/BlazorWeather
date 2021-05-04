@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WeatherClient2021;
+using WeatherClient;
 
 namespace BlazorWeather
 {
@@ -25,7 +25,10 @@ namespace BlazorWeather
             { "Thunderstorms", "thunderstorms" },
             { "Mostly cloudy w/ t-storms", "thunderstorms" },
             { "Partly sunny w/ t-storms", "thunderstorms" },
-            { "Clouds and sun", "partly-cloudy" }
+            { "Clouds and sun", "partly-cloudy" },
+            { "Overcast", "partly-cloudy" },
+            { "Rain", "showers"},
+            { "Partly sunny w/ showers", "showers" }
         };
 
         public static string GetIconUrl(this WeatherSnapshot weather) 
@@ -56,6 +59,7 @@ namespace BlazorWeather
             fileName += ".svg";
             return fileName;
         }
-        static bool IsNight(DateTimeOffset dateTime) => dateTime.TimeOfDay < TimeSpan.FromHours(6) || dateTime.TimeOfDay > TimeSpan.FromHours(20);
+        static bool IsNight(DateTimeOffset dateTime)
+            => dateTime.TimeOfDay < TimeSpan.FromHours(6) || dateTime.TimeOfDay > TimeSpan.FromHours(20);
     }
 }

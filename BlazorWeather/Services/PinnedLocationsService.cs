@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WeatherClient2021;
+using WeatherClient;
 
 namespace BlazorWeather
 {
