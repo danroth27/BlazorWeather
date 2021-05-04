@@ -9,7 +9,7 @@
         <div class="flex flex-col w-16 mr-2 flex-shrink-0 items-center">
             <div class="text-sm">@forecast.DateTime.DayOfWeek.ToString().First()</div>
             <div class="text-sm">@forecast.DateTime.Day</div>
-            <img class="w-4 m-2" src="@forecast.GetIconUrl()" />
+            <img class="w-4 h-4 m-2" src="@forecast.GetIconUrl()" />
             <div class="pl-1 text-sm mt-3">@DH.DisplayTemp(max)</div>
             <div class="h-28 py-2 flex">
                 <div style="height: @(BarHeight(forecast.Temperature))" class="w-2 temperature-gradient mt-auto"></div>

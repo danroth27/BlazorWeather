@@ -28,7 +28,8 @@ namespace BlazorWeather
             { "Clouds and sun", "partly-cloudy" },
             { "Overcast", "partly-cloudy" },
             { "Rain", "showers"},
-            { "Partly sunny w/ showers", "showers" }
+            { "Partly sunny w/ showers", "showers" },
+            { "Mostly cloudy w/ showers", "showers" }
         };
 
         static Dictionary<string, string> IconDataUrls = new()
