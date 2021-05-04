@@ -41,6 +41,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorWeather\BlazorWeather.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.19041.16" />
     <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.19041.16" />
   </ItemGroup>
@@ -69,9 +73,6 @@
     <EmbeddedResource Include="..\BlazorWeather.Maui\wwwroot\*" Link="wwwroot\%(FileName)%(Extension)" />
     <EmbeddedResource Include="..\BlazorWeather.Maui\wwwroot\css\*" Link="wwwroot\css\%(FileName)%(Extension)" />
     <EmbeddedResource Include="..\BlazorWeather.Maui\wwwroot\weather-icons\*" Link="wwwroot\weather-icons\%(FileName)%(Extension)" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BlazorWeather2021\BlazorWeather2021.csproj" />
   </ItemGroup>
   
   <ItemGroup>

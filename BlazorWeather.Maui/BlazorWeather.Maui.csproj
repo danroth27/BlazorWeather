@@ -24,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorWeather2021\BlazorWeather2021.csproj" />
+    <ProjectReference Include="..\BlazorWeather\BlazorWeather.csproj" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <MauiImage Include="Resources\AppIcons\appicon.svg" ForegroundFile="Resources\AppIcons\appiconfg.svg" IsAppIcon="true" />
     <MauiSplashScreen Include="Resources\AppIcons\appiconfg.svg" Color="#512BD4" />

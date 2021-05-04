@@ -1,4 +1,4 @@
-﻿using BlazorWeather2021;
+﻿using BlazorWeather;
 using Microsoft.AspNetCore.Components.WebView.Maui;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,25 +17,32 @@ namespace BlazorWeather.Maui
         {
             InitializeComponent();
 
+            // Setup configuration
             var configBuilder = new ConfigurationBuilder();
             configBuilder.AddUserSecrets(this.GetType().Assembly);
             var config = configBuilder.Build();
 
+            // Configure services
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddBlazorWebView();
             serviceCollection.AddBlazorWeather(config["WeatherBaseUri"]);
 
+            // Create the BlazorWebView
             var blazorWebView = new BlazorWebView()
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HostPage = @"wwwroot/index.html",
                 Services = serviceCollection.BuildServiceProvider(),
+                RootComponents =
+                {
+                    new RootComponent 
+                    {
+                        Selector = "#app", 
+                        ComponentType = Type.GetType("BlazorWeather.Maui.Main")
+                    }
+                }
             };
-
-            var componentType = Type.GetType("BlazorWeather.Maui.Main")
-                ?? Type.GetType("BlazorWeather.Maui.WinUI3.Main");
-            blazorWebView.RootComponents.Add(new RootComponent { Selector = "#app", ComponentType = componentType, });
-
+            
             Content = blazorWebView;
 
             SetupTrayIcon();

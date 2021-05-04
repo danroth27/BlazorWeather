@@ -26,7 +26,7 @@ namespace BlazorWeather.Server
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddBlazorWeather();
+            services.AddBlazorWeather(Configuration["WeatherBaseUri"]);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

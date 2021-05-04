@@ -1,0 +1,14 @@
+﻿.stat-box {
+    background-color: var(--mid-background);
+    aspect-ratio: 1;
+    max-width: 11rem;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-source {
+    color: #91A7B7;
+}

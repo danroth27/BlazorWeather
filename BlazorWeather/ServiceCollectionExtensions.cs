@@ -6,15 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WeatherClientLib;
+using WeatherClient2021;
 
 namespace BlazorWeather
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddBlazorWeather(this IServiceCollection services)
+        public static IServiceCollection AddBlazorWeather(this IServiceCollection services, string baseUri)
         {
-            services.AddHttpClient<IWeatherForecastService, HttpWeatherForecastService>();
+            services.AddHttpClient<IWeatherService, WeatherService>(httpClient => httpClient.BaseAddress = new Uri(baseUri));
             services.AddScoped<IGeolocationService, GeolocationService>();
             services.AddBlazoredLocalStorage();
             services.AddScoped<PinnedLocationsService>();
