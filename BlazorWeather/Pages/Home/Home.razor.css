@@ -29,3 +29,7 @@
     50% { transform: rotate(-22deg) }
     100% { transform: rotate(-28deg) }
 }
+
+.dummy {
+    box-shadow: inherit;
+}
