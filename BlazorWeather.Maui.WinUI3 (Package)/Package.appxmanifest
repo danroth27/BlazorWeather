@@ -12,7 +12,7 @@
     Version="1.0.0.0" />
 
   <Properties>
-    <DisplayName>BlazorWeather</DisplayName>
+    <DisplayName>Blazor Weather</DisplayName>
     <PublisherDisplayName>Microsoft</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
@@ -31,8 +31,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="BlazorWeather"
-        Description="BlazorWeather"
+        DisplayName="Blazor Weather"
+        Description="Blazor Weather"
         BackgroundColor="#512BD4"
         Square150x150Logo="Images\Square150x150Logo.png"
         Square44x44Logo="Images\Square44x44Logo.png">

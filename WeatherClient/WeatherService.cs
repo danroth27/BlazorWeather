@@ -12,9 +12,9 @@ namespace WeatherClient
     {
         static List<Location> locations = new()
         {
+            new Location { Name = "Boston", Country = "USA", Coordinate = new Coordinate(42.3601, -71.0589) },
             new Location { Name = "Redmond", Country = "USA", Coordinate = new Coordinate(47.6740, -122.1215) },
             new Location { Name = "St. Louis", Country = "USA", Coordinate = new Coordinate(38.6270, -90.1994) },
-            new Location { Name = "Boston", Country = "USA", Coordinate = new Coordinate(42.3601, -71.0589) },
             new Location { Name = "NYC", Country = "USA", Coordinate = new Coordinate(40.7128, -74.0060) },
             new Location { Name = "Amsterdam", Country = "Netherlands", Coordinate = new Coordinate(52.3676, 4.9041) },
             new Location { Name = "Seoul", Country = "South Korea", Coordinate = new Coordinate(37.5665, 126.9780) },
@@ -36,8 +36,8 @@ namespace WeatherClient
             this.httpClient = httpClient;
         }
 
-        public Task<IEnumerable<Location>> GetLocations(string query)
-            => Task.FromResult(locations.Where(l => l.Name.Contains(query)));
+        public Task<IEnumerable<Location>> GetLocations(string query = null)
+            => Task.FromResult(query == null ? locations : locations.Where(l => l.Name.Contains(query)));
 
         public Task<WeatherResponse> GetWeather(Coordinate location)
             => httpClient.GetFromJsonAsync<WeatherResponse>($"/weather/{location}");

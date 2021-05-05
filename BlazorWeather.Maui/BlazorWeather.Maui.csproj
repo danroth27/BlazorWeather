@@ -3,7 +3,7 @@
     <TargetFrameworks>net6.0-maccatalyst</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <SingleProject>true</SingleProject>
-    <ApplicationTitle>BlazorWeather.Maui</ApplicationTitle>
+    <ApplicationTitle>Blazor Weather</ApplicationTitle>
     <ApplicationId>com.microsoft.blazorweather</ApplicationId>
     <ApplicationVersion>1.0</ApplicationVersion>
     <AndroidVersionCode>1</AndroidVersionCode>

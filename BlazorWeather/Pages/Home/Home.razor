@@ -72,6 +72,7 @@ else {
                     </div>
                 </div>
 
+                @*TODO: Add hourly forecast*@
                 <Next24Hours HourlyForecasts="AppState.Weather.HourlyForecasts" />
                 <Next14Days DailyForecasts="AppState.Weather.DailyForecasts" />
             </div>
@@ -89,7 +90,7 @@ else {
     {
         if (AppState.CurrentLocation == null)
         {
-            var locations = await WeatherService.GetLocations("Boston");
+            var locations = await WeatherService.GetLocations();
             AppState.CurrentLocation = locations.First();
         }
         AppState.Weather = await WeatherService.GetWeather(AppState.CurrentLocation.Coordinate);
