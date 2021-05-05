@@ -3,10 +3,10 @@
     aspect-ratio: 1;
     max-width: 11rem;
     padding: 1rem;
-    border-radius: 1.5rem;
     position: relative;
     display: flex;
     flex-direction: column;
+    border-radius: 1.5rem;
 }
 
 .stat-source {

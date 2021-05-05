@@ -15,8 +15,6 @@ namespace BlazorWeather.Maui
     {
         public MainPage()
         {
-            InitializeComponent();
-
             // Setup configuration
             var configBuilder = new ConfigurationBuilder();
             configBuilder.AddUserSecrets(this.GetType().Assembly);
@@ -26,28 +24,13 @@ namespace BlazorWeather.Maui
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddBlazorWebView();
             serviceCollection.AddBlazorWeather(config["WeatherBaseUri"]);
+            Resources.Add("services", serviceCollection.BuildServiceProvider());
 
-            // Create the BlazorWebView
-            var blazorWebView = new BlazorWebView()
-            {
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                HostPage = @"wwwroot/index.html",
-                Services = serviceCollection.BuildServiceProvider(),
-                RootComponents =
-                {
-                    new RootComponent 
-                    {
-                        Selector = "#app", 
-                        ComponentType = Type.GetType("BlazorWeather.Maui.Main")
-                    }
-                }
-            };
-            
-            Content = blazorWebView;
+            InitializeComponent();
 
-            #if WINDOWS10_0_17763_0_OR_GREATER
+#if WINDOWS10_0_17763_0_OR_GREATER
             Microsoft.Maui.MauiWinUIApplication.Current.MainWindow.Title = "Blazor Weather";
-            #endif
+#endif
 
             SetupTrayIcon();
         }

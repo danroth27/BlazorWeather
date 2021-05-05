@@ -131,9 +131,7 @@ namespace WeatherClient
     {
         public static IEnumerable<WeatherStation> GetWeatherStations(this WeatherSnapshot weather)
         {
-            var rand = new Random();
-            var n = rand.Next(1, 5);
-            for (var i = 0; i < n; i++)
+            for (var i = 0; i < 3; i++)
             {
                 yield return new WeatherStation { CurrentWeather = weather };
             }
