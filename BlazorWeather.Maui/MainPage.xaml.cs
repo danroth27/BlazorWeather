@@ -15,23 +15,8 @@ namespace BlazorWeather.Maui
     {
         public MainPage()
         {
-            // Setup configuration
-            var configBuilder = new ConfigurationBuilder();
-            configBuilder.AddUserSecrets(this.GetType().Assembly);
-            var config = configBuilder.Build();
-
-            // Configure services
-            var serviceCollection = new ServiceCollection();
-            serviceCollection.AddBlazorWebView();
-            serviceCollection.AddBlazorWeather(config["WeatherBaseUri"]);
-            Resources.Add("services", serviceCollection.BuildServiceProvider());
-
+            ConfigureServices();
             InitializeComponent();
-
-#if WINDOWS10_0_17763_0_OR_GREATER
-            Microsoft.Maui.MauiWinUIApplication.Current.MainWindow.Title = "Blazor Weather";
-#endif
-
             SetupTrayIcon();
         }
 
@@ -44,8 +29,26 @@ namespace BlazorWeather.Maui
                 trayService.Initialize();
                 trayService.ClickHandler = () => 
                     ServiceProvider.GetService<INotificationService>()
-                        ?.ShowNotification("Tray Clicked", "Great job!", "Just letting you know you clicked the tray.");
+                        ?.ShowNotification("Tray Clicked", "Great job!", "You're using Blazor and .NET MAUI like pro! 😎");
             }
+        }
+
+        private void ConfigureServices()
+        {
+            // Setup configuration
+            var configBuilder = new ConfigurationBuilder();
+            configBuilder.AddUserSecrets(this.GetType().Assembly);
+            var config = configBuilder.Build();
+
+            // Configure services
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddBlazorWebView();
+            serviceCollection.AddBlazorWeather(config["WeatherBaseUri"]);
+            Resources.Add("services", serviceCollection.BuildServiceProvider());
+
+#if WINDOWS10_0_17763_0_OR_GREATER
+            Microsoft.Maui.MauiWinUIApplication.Current.MainWindow.Title = "Blazor Weather";
+#endif
         }
     }
 }
