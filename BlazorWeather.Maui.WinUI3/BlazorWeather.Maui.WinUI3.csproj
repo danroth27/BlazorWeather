@@ -11,7 +11,6 @@
     <EnableDefaultPageItems>False</EnableDefaultPageItems>
     <EnableDefaultApplicationDefinition>False</EnableDefaultApplicationDefinition>
     <StartupObject>BlazorWeather.Maui.WinUI.Program</StartupObject>
-    <UserSecretsId>6da98b65-8ce9-42d6-b26b-84b7c4b3051a</UserSecretsId>
   </PropertyGroup>
   <PropertyGroup>
     <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
@@ -31,7 +30,6 @@
     <PackageReference Include="Microsoft.Maui.Resizetizer" Version="6.0.100-preview.4.*" />
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.1" />
     <PackageReference Include="PInvoke.User32" Version="0.7.104" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0-preview.4.21222.10" />
   </ItemGroup>
 
   <ItemGroup>

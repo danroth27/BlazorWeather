@@ -24,15 +24,8 @@ namespace BlazorWeather.Maui
                 })
                 .ConfigureServices(services =>
                 {
-                    // Setup configuration
-                    var configBuilder = new ConfigurationBuilder();
-                    configBuilder.AddUserSecrets(this.GetType().Assembly);
-                    var config = configBuilder.Build();
-
-                    // Configure services
-                    var serviceCollection = new ServiceCollection();
-                    serviceCollection.AddBlazorWebView();
-                    serviceCollection.AddBlazorWeather(config["WeatherBaseUri"]);
+                    services.AddBlazorWebView();
+                    services.AddBlazorWeather("http://minimalweather20210428173256.azurewebsites.net/");
 #if WINDOWS
                     services.AddSingleton<ITrayService, Windows.TrayService>();
                     services.AddSingleton<INotificationService, Windows.NotificationService>();
