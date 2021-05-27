@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWeather.Maui.WinUI3",
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "BlazorWeather.Maui.WinUI3 (Package)", "BlazorWeather.Maui.WinUI3 (Package)\BlazorWeather.Maui.WinUI3 (Package).wapproj", "{A88FCF8C-EC35-4623-B126-C591EEF99C70}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "desktop", "desktop", "{C2147996-A910-4375-9ED1-3EF5C744D6EF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherClient", "WeatherClient\WeatherClient.csproj", "{4464A83F-1E70-4372-A620-0E4FA3DF5CFE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWeather", "BlazorWeather\BlazorWeather.csproj", "{ECC6086F-BF11-4E90-90EB-55B496429B09}"
@@ -129,11 +127,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{AD4262EF-94A3-4248-A261-16EB23FF03AC} = {C2147996-A910-4375-9ED1-3EF5C744D6EF}
-		{34FC8854-83D8-4B30-A8BF-33AB4F4CC6E8} = {C2147996-A910-4375-9ED1-3EF5C744D6EF}
-		{A88FCF8C-EC35-4623-B126-C591EEF99C70} = {C2147996-A910-4375-9ED1-3EF5C744D6EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DDBF187C-B0CA-4286-A745-0345D7BEDF9F}
