@@ -1,6 +1,4 @@
 ﻿using System;
-using Blazored.LocalStorage;
-using Darnton.Blazor.DeviceInterop.Geolocation;
 using Microsoft.Extensions.DependencyInjection;
 using WeatherClient;
 

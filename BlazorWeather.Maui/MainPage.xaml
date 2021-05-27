@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:BlazorWeather.Maui"
              xmlns:b="clr-namespace:Microsoft.AspNetCore.Components.WebView.Maui;assembly=Microsoft.AspNetCore.Components.WebView.Maui"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
-    <b:BlazorWebView VerticalOptions="FillAndExpand" HostPage="wwwroot/index.html" Services="{StaticResource services}">
+    <b:BlazorWebView VerticalOptions="FillAndExpand" HostPage="wwwroot/index.html">
         <b:BlazorWebView.RootComponents>
             <b:RootComponent Selector="#app" ComponentType="{x:Type local:Main}" />
         </b:BlazorWebView.RootComponents>
