@@ -1,18 +1,37 @@
 # Blazor Weather
 
-A Blazor Weather sample app that shows the current weather for your current location and a collection of pinned locations.
+A simple cross-platform weather app implemented using Blazor and .NET MAUI
 
-## Setup
+## Run the sample
 
-You'll need an [Accuweather API key](https://developer.accuweather.com/) to use their services. You can sign up for a free trial - just be aware it's only good for 50 requests/day. 
+Install [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0) and setup [.NET MAUI](https://github.com/dotnet/maui/wiki/Getting-Started),
 
-## Credits
+### Windows
 
-The weather is supplied by [Accuweather](https://www.accuweather.com/). 
+To run the Windows version of the app, open the solution in the latest [Visual Studio preview](https://visualstudio.com/preview).
 
-Geolocation is handled using [Darnton.Blazor.DeviceInterop](https://github.com/darnton/BlazorDeviceInterop).
+Select the "BlazorWeather.Maui.WinUI3 (Package)" project as the startup project and make sure the x64 platform is selected.
 
-Local storage is handled using [Blazored.LocalStorage](https://github.com/blazored/LocalStorage).
+Run the app using <kbd>F5</kbd> or <kbd>Ctrl+F5</kbd>.
 
-Space Needle icon by [Blair Adams via The Noun Project](https://thenounproject.com/search/?q=space%20needle&i=915578).
+### Android
 
+Start the Android emulator first, and then run:
+
+```
+dotnet build BlazorWeather.Maui -t:Run -f net6.0-android
+```
+
+To run from Visual Studio, select the BlazorWeather.Maui as the startup project, and select Android Emulator in the Run button drop down. Run the app using <kbd>F5</kbd> or <kbd>Ctrl+F5</kbd>.
+
+### iOS
+
+```
+dotnet build BlazorWeather.Maui -t:Run -f net6.0-ios
+```
+
+### Mac
+
+```
+dotnet build BlazorWeather.Maui -t:Run -f net6.0-maccatalyst
+```
