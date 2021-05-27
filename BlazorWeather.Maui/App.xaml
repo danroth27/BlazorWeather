@@ -1,26 +1,23 @@
 ﻿<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:BlazorWeather.Maui"
-             x:Class="BlazorWeather.Maui.App">
-    <Application.Resources>
-        <ResourceDictionary>
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:BlazorWeather.Maui"
+       x:Class="BlazorWeather.Maui.App">
+  <Application.Resources>
+    <ResourceDictionary>
+      <Color x:Key="PageBackgroundColor">#512bdf</Color>
+      <Color x:Key="PrimaryTextColor">White</Color>
 
-            <!-- Add any additional resources here. -->
-            <Color x:Key="PageBackgroundColor">#FFFFFF</Color>
+      <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="FontFamily" Value="OpenSansRegular" />
+      </Style>
 
-            <Color x:Key="PrimaryTextColor">#000000</Color>
+      <Style TargetType="Button">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="FontFamily" Value="OpenSansRegular" />
+        <Setter Property="BackgroundColor" Value="#2b0b98" />
+      </Style>
 
-            <Color x:Key="GlyphColor">#2B0B98</Color>
-
-            <Style TargetType="Label">
-                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
-            </Style>
-
-            <Style TargetType="Label" x:Key="Glyph">
-                <Setter Property="TextColor" Value="{DynamicResource GlyphColor}" />
-                <Setter Property="FontFamily" Value="IonIcons" />
-                <Setter Property="FontSize" Value="32" />
-            </Style>
-        </ResourceDictionary>
-    </Application.Resources>
+    </ResourceDictionary>
+  </Application.Resources>
 </Application>

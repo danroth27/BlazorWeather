@@ -1,51 +1,61 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
   <PropertyGroup>
-    <TargetFrameworks>net6.0-maccatalyst</TargetFrameworks>
+    <!-- iOS, Android, MacCatalyst -->
+    <TargetFrameworks>net6.0-ios;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <SingleProject>true</SingleProject>
+    <RootNamespace>BlazorWeather.Maui</RootNamespace>
+
+    <!-- Display name -->
     <ApplicationTitle>Blazor Weather</ApplicationTitle>
+    <!-- App Identifier -->
     <ApplicationId>com.microsoft.blazorweather</ApplicationId>
+    <!-- Versions -->
     <ApplicationVersion>1.0</ApplicationVersion>
     <AndroidVersionCode>1</AndroidVersionCode>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-ios'">iossimulator-x64</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
-    <InvariantGlobalization Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">true</InvariantGlobalization>
     <UserSecretsId>6da98b65-8ce9-42d6-b26b-84b7c4b3051a</UserSecretsId>
     <GenerateEmbeddedFilesManifest>True</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui" Version="6.0.100-preview.4.479" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="6.0.100-preview.4.479" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="6.0.100-preview.4.479" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="6.0.100-preview.4.479" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.0-preview.4.21227.6" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0-preview.4.21222.10" />
+    <!-- App Icon -->
+    <MauiImage
+      Include="Resources\appicon.svg"
+      ForegroundFile="Resources\appiconfg.svg"
+      IsAppIcon="true" />
+
+    <!-- Splash Screen -->
+    <MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" />
+
+    <!-- Images -->
+    <MauiImage Include="Resources\Images\*" />
+
+    <!-- Custom Fonts -->
+    <MauiFont Include="Resources\Fonts\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="6.0.100-preview.4.*" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.0-preview.4.21253.5" />
+    <PackageReference Include="Microsoft.Maui" Version="6.0.100-preview.4.*" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="6.0.100-preview.4.*" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="6.0.100-preview.4.*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0-preview.4.21253.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorWeather\BlazorWeather.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <MauiImage Include="Resources\AppIcons\appicon.svg" ForegroundFile="Resources\AppIcons\appiconfg.svg" IsAppIcon="true" />
-    <MauiSplashScreen Include="Resources\AppIcons\appiconfg.svg" Color="#512BD4" />
-    <MauiImage Include="Resources\Images\*" />
-    <MauiFont Include="Resources\Fonts\*" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <Content Remove="**\*.razor" />
-  </ItemGroup>
-  <ItemGroup>
-    <RazorComponent Include="**\*.razor" />
-  </ItemGroup>
+  <PropertyGroup>
+    <InvariantGlobalization Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">true</InvariantGlobalization>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-ios'">iossimulator-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
+  </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="wwwroot\**\*" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="wwwroot\**\*" />
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-android'">
+    <AndroidEnvironment Include="Android\AndroidEnvironment.txt" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">
