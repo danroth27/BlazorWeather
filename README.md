@@ -35,3 +35,10 @@ dotnet build BlazorWeather.Maui -t:Run -f net6.0-ios
 ```
 dotnet build BlazorWeather.Maui -t:Run -f net6.0-maccatalyst
 ```
+
+## Known issues
+
+- Referencing scoped CSS bundles isn't working properly yet.
+  - Workaround: Reference the scope bundle directly
+- Configuring a root component for a `BlazorWebView` from a different project has some issues.
+  - Workaround: Wrap the root component in another component in the .NET MAUI project.
