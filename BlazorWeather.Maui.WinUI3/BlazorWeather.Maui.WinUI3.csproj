@@ -85,6 +85,14 @@
     <MauiImage Include="$(OtherProjectRoot)\Resources\**\*.svg" Link="Resources\%(RecursiveDir)%(FileName)%(Extension)" />
     <MauiFont Include="$(OtherProjectRoot)\Resources\Fonts\**\*.ttf" Link="Resources\Fonts\%(RecursiveDir)%(FileName)%(Extension)" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Windows\Resources\trayicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Windows\Resources\trayicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   
   <Target Name="RemoveUnusedMSBuildTargets" BeforeTargets="_CopyOutOfDateSourceItemsToOutputDirectory">
     <!-- Remove errantly included MSBuild targets and props so they don't get included in the output directory as resources/assets -->
