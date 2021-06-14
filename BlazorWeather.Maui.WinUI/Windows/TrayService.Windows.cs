@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlazorWeather.Maui;
 
-namespace BlazorWeather.Maui.Windows
+namespace BlazorWeather.Maui.WinUI
 {
 	public class TrayService : ITrayService
 	{
