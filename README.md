@@ -10,7 +10,11 @@ Install [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0) and setup [.N
 
 To run the Windows version of the app, open the solution in the latest [Visual Studio preview](https://visualstudio.com/preview).
 
-Select the "BlazorWeather.Maui.WinUI (Package)" project as the startup project and make sure the x64 platform is selected.
+You will also need to install 2 preview extensions:
+- https://marketplace.visualstudio.com/items?itemName=ProjectReunion.MicrosoftProjectReunionPreview
+- https://marketplace.visualstudio.com/items?itemName=ProjectReunion.MicrosoftSingleProjectMSIXPackagingTools
+
+Select the "BlazorWeather.Maui.WinUI" project as the startup project.
 
 Run the app using <kbd>F5</kbd> or <kbd>Ctrl+F5</kbd>.
 
