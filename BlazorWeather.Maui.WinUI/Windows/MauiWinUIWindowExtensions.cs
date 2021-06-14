@@ -3,7 +3,7 @@ using System;
 using System.Runtime.InteropServices;
 using WinRT;
 
-namespace BlazorWeather.Maui.Windows
+namespace BlazorWeather.Maui.WinUI
 {
 	public static class MauiWinUIWindowExtensions
 	{

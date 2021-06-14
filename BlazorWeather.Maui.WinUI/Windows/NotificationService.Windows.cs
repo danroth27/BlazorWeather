@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Maui;
 
-namespace BlazorWeather.Maui.Windows
+namespace BlazorWeather.Maui.WinUI
 {
 	public class NotificationService : INotificationService
 	{
