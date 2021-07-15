@@ -1,7 +1,7 @@
 {
   "profiles": {
     "BlazorWeather.Maui.WinUI": {
-      "commandName": "AppContainer"
+      "commandName": "MsixPackage"
     }
   }
 }

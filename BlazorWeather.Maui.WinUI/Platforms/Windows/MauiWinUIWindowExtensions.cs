@@ -1,19 +1,19 @@
-﻿using Microsoft.Maui;
+﻿using Microsoft.UI.Xaml;
 using System;
 using System.Runtime.InteropServices;
 using WinRT;
 
 namespace BlazorWeather.Maui.WinUI
 {
-	public static class MauiWinUIWindowExtensions
+	public static class WindowExtensions
 	{
-		public static IntPtr GetNativeWindowHandle(this MauiWinUIWindow window)
+		public static IntPtr GetNativeWindowHandle(this Window window)
 		{
 			var nativeWindow = window.As<IWindowNative>();
 			return nativeWindow.WindowHandle;
 		}
 
-		public static void BringToFront(this MauiWinUIWindow window)
+		public static void BringToFront(this Window window)
 		{
 			var hwnd = window.GetNativeWindowHandle();
 
@@ -23,7 +23,7 @@ namespace BlazorWeather.Maui.WinUI
 			_ = PInvoke.User32.SetForegroundWindow(hwnd);
 		}
 
-		public static void MinimizeToTray(this MauiWinUIWindow window)
+		public static void MinimizeToTray(this Window window)
 		{
 			var hwnd = window.GetNativeWindowHandle();
 
