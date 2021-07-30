@@ -15,11 +15,12 @@
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     <WindowsPackageType>MSIX</WindowsPackageType>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.0-preview.6.*" />
-    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.0-preview.7.21378.6" />
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.2" />
     <PackageReference Include="PInvoke.User32" Version="0.7.104" />
   </ItemGroup>
 
@@ -34,43 +35,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <MauiImage
-      Include="..\BlazorWeather.Maui\Resources\appicon.svg"
-      Link="Resources\appicon.svg"
-      ForegroundFile="..\BlazorWeather.Maui\Resources\appiconfg.svg"
-      IsAppIcon="true"
-      Color="#081B25" />
-    <MauiSplashScreen
-      Include="..\BlazorWeather.Maui\Resources\appiconfg.svg"
-      Link="Resources\appiconfg.svg"
-      Color="#081B25" />
-    <MauiImage
-      Include="..\BlazorWeather.Maui\Resources\Images\*"
-      Link="Resources\Images\%(Filename)%(Extension)" />
-    <MauiFont
-      Include="..\BlazorWeather.Maui\Resources\Fonts\*"
-      Link="Resources\Fonts\%(Filename)%(Extension)" />
+    <MauiImage Include="..\BlazorWeather.Maui\Resources\appicon.svg" Link="Resources\appicon.svg" ForegroundFile="..\BlazorWeather.Maui\Resources\appiconfg.svg" IsAppIcon="true" Color="#081B25" />
+    <MauiSplashScreen Include="..\BlazorWeather.Maui\Resources\appiconfg.svg" Link="Resources\appiconfg.svg" Color="#081B25" />
+    <MauiImage Include="..\BlazorWeather.Maui\Resources\Images\*" Link="Resources\Images\%(Filename)%(Extension)" />
+    <MauiFont Include="..\BlazorWeather.Maui\Resources\Fonts\*" Link="Resources\Fonts\%(Filename)%(Extension)" />
     <Content Include="Platforms\Windows\Resources\trayicon.ico" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile
-      Include="..\BlazorWeather.Maui\**\*.cs"
-      Exclude="..\BlazorWeather.Maui\bin\**;..\BlazorWeather.Maui\obj\**;..\BlazorWeather.Maui\Platforms\**"
-      Link="%(RecursiveDir)%(Filename)%(Extension)"/>
-    <MauiXaml
-      Include="..\BlazorWeather.Maui\**\*.xaml"
-      Exclude="..\BlazorWeather.Maui\bin\**;..\BlazorWeather.Maui\obj\**"
-      Link="%(RecursiveDir)%(FileName)%(Extension)" />
-    <_ThisProjectStaticWebAsset
-      Include="..\BlazorWeather.Maui\wwwroot\**"
-      Link="wwwroot\%(RecursiveDir)%(Filename)%(Extension)"
-      RelativePath="%(RecursiveDir)%(Filename)%(Extension)" />
-    <None Include="@(_ThisProjectStaticWebAsset)"/>
-    <RazorComponent
-      Include="..\BlazorWeather.Maui\**\*.razor"
-      Exclude="..\BlazorWeather.Maui\bin\**;..\BlazorWeather.Maui\obj\**"
-      Link="%(RecursiveDir)%(Filename)%(Extension)"/>
+    <Compile Include="..\BlazorWeather.Maui\**\*.cs" Exclude="..\BlazorWeather.Maui\bin\**;..\BlazorWeather.Maui\obj\**;..\BlazorWeather.Maui\Platforms\**" Link="%(RecursiveDir)%(Filename)%(Extension)" />
+    <MauiXaml Include="..\BlazorWeather.Maui\**\*.xaml" Exclude="..\BlazorWeather.Maui\bin\**;..\BlazorWeather.Maui\obj\**" Link="%(RecursiveDir)%(FileName)%(Extension)" />
+    <_ThisProjectStaticWebAsset Include="..\BlazorWeather.Maui\wwwroot\**" Link="wwwroot\%(RecursiveDir)%(Filename)%(Extension)" RelativePath="%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="@(_ThisProjectStaticWebAsset)" />
+    <RazorComponent Include="..\BlazorWeather.Maui\**\*.razor" Exclude="..\BlazorWeather.Maui\bin\**;..\BlazorWeather.Maui\obj\**" Link="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
 </Project>
