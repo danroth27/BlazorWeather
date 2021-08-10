@@ -45,8 +45,7 @@
   <ItemGroup>
     <Compile Include="..\BlazorWeather.Maui\**\*.cs" Exclude="..\BlazorWeather.Maui\bin\**;..\BlazorWeather.Maui\obj\**;..\BlazorWeather.Maui\Platforms\**" Link="%(RecursiveDir)%(Filename)%(Extension)" />
     <MauiXaml Include="..\BlazorWeather.Maui\**\*.xaml" Exclude="..\BlazorWeather.Maui\bin\**;..\BlazorWeather.Maui\obj\**" Link="%(RecursiveDir)%(FileName)%(Extension)" />
-    <_ThisProjectStaticWebAsset Include="..\BlazorWeather.Maui\wwwroot\**" Link="wwwroot\%(RecursiveDir)%(Filename)%(Extension)" RelativePath="%(RecursiveDir)%(Filename)%(Extension)" />
-    <None Include="@(_ThisProjectStaticWebAsset)" />
+    <Content Include="..\BlazorWeather.Maui\wwwroot\**" Link="wwwroot\%(RecursiveDir)%(Filename)%(Extension)" />
     <RazorComponent Include="..\BlazorWeather.Maui\**\*.razor" Exclude="..\BlazorWeather.Maui\bin\**;..\BlazorWeather.Maui\obj\**" Link="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
