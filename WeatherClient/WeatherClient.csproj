@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Net.Http.Json" Version="6.0.0-preview.4.21253.7" />
+    <PackageReference Include="System.Net.Http.Json" Version="6.0.0-preview.7.21377.19" />
   </ItemGroup>
 
 </Project>

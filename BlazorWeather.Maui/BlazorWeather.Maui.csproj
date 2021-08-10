@@ -17,15 +17,12 @@
     <AndroidVersionCode>1</AndroidVersionCode>
     <UserSecretsId>6da98b65-8ce9-42d6-b26b-84b7c4b3051a</UserSecretsId>
     <GenerateEmbeddedFilesManifest>True</GenerateEmbeddedFilesManifest>
+    <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
   </PropertyGroup>
 
   <ItemGroup>
     <!-- App Icon -->
-    <MauiImage
-      Include="Resources\appicon.svg"
-      ForegroundFile="Resources\appiconfg.svg"
-      IsAppIcon="true"
-      Color="#081B25" />
+    <MauiImage Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" IsAppIcon="true" Color="#081B25" />
 
     <!-- Splash Screen -->
     <MauiSplashScreen Include="Resources\appiconfg.svg" Color="#081B25" />
@@ -38,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.0-preview.6.*" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.0-preview.7.21378.6" />
   </ItemGroup>
 
   <ItemGroup>
