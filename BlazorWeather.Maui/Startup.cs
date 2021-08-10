@@ -15,7 +15,7 @@ namespace BlazorWeather.Maui
         public void Configure(IAppHostBuilder appBuilder)
         {
             appBuilder
-                .RegisterBlazorMauiWebView(typeof(Startup).Assembly)
+                .RegisterBlazorMauiWebView()
                 .UseMicrosoftExtensionsServiceProviderFactory()
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
@@ -25,7 +25,7 @@ namespace BlazorWeather.Maui
                 .ConfigureServices(services =>
                 {
                     services.AddBlazorWebView();
-                    services.AddBlazorWeather("http://minimalweather20210428173256.azurewebsites.net/");
+                    services.AddBlazorWeather("https://minimalweather20210428173256.azurewebsites.net/");
 #if WINDOWS
                     services.AddSingleton<ITrayService, WinUI.TrayService>();
                     services.AddSingleton<INotificationService, WinUI.NotificationService>();
