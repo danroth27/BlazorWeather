@@ -4,7 +4,6 @@ using Microsoft.Maui.Controls.Xaml;
 
 namespace BlazorWeather.Maui
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
         public MainPage()

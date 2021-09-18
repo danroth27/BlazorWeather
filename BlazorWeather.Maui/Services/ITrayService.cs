@@ -2,10 +2,10 @@
 
 namespace BlazorWeather.Maui
 {
-	public interface ITrayService
-	{
-		void Initialize();
+    public interface ITrayService
+    {
+        void Initialize();
 
-		Action ClickHandler { get; set; }
-	}
+        Action ClickHandler { get; set; }
+    }
 }

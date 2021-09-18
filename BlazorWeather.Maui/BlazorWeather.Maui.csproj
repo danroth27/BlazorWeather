@@ -1,56 +1,78 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <!-- iOS, Android, MacCatalyst -->
-    <TargetFrameworks>net6.0-ios;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
-    <OutputType>Exe</OutputType>
-    <SingleProject>true</SingleProject>
-    <UseMaui>true</UseMaui>
-    <RootNamespace>BlazorWeather.Maui</RootNamespace>
+    <PropertyGroup>
+        <!-- iOS, Android, MacCatalyst -->
+        <TargetFrameworks>net6.0-ios;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
+        <OutputType>Exe</OutputType>
+        <RootNamespace>BlazorWeather.Maui</RootNamespace>
+        <UseMaui>true</UseMaui>
+        <SingleProject>true</SingleProject>
+        <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
 
-    <!-- Display name -->
-    <ApplicationTitle>Blazor Weather</ApplicationTitle>
-    <!-- App Identifier -->
-    <ApplicationId>com.microsoft.blazorweather</ApplicationId>
-    <!-- Versions -->
-    <ApplicationVersion>1.0</ApplicationVersion>
-    <AndroidVersionCode>1</AndroidVersionCode>
-    <UserSecretsId>6da98b65-8ce9-42d6-b26b-84b7c4b3051a</UserSecretsId>
-    <GenerateEmbeddedFilesManifest>True</GenerateEmbeddedFilesManifest>
-    <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
-  </PropertyGroup>
 
-  <ItemGroup>
-    <!-- App Icon -->
-    <MauiImage Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" IsAppIcon="true" Color="#081B25" />
+        <!-- Display name -->
+        <ApplicationTitle>Blazor Weather</ApplicationTitle>
 
-    <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\appiconfg.svg" Color="#081B25" />
+        <!-- App Identifier -->
+        <ApplicationId>com.microsoft.blazorweather</ApplicationId>
 
-    <!-- Images -->
-    <MauiImage Include="Resources\Images\*" />
+        <!-- Versions -->
+        <ApplicationVersion>1.0</ApplicationVersion>
+        <AndroidVersionCode>1</AndroidVersionCode>
 
-    <!-- Custom Fonts -->
-    <MauiFont Include="Resources\Fonts\*" />
-  </ItemGroup>
+        <!-- Required for C# Hot Reload -->
+        <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.0-preview.7.21378.6" />
-  </ItemGroup>
+        <UserSecretsId>6da98b65-8ce9-42d6-b26b-84b7c4b3051a</UserSecretsId>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BlazorWeather\BlazorWeather.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <!-- App Icon -->
+        <MauiImage Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" IsAppIcon="true" Color="#081B25" />
 
-  <PropertyGroup>
-    <InvariantGlobalization Condition="$(TargetFramework.Contains('-maccatalyst'))">true</InvariantGlobalization>
-    <RuntimeIdentifier Condition="$(TargetFramework.Contains('-ios'))">iossimulator-x64</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="$(TargetFramework.Contains('-maccatalyst'))">maccatalyst-x64</RuntimeIdentifier>
-    <UseInterpreter Condition="$(TargetFramework.Contains('-android'))">False</UseInterpreter>
-  </PropertyGroup>
+        <!-- Splash Screen -->
+        <MauiSplashScreen Include="Resources\appiconfg.svg" Color="#081B25" />
 
-  <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
-    <BundleResource Include="Platforms\MacCatalyst\trayicon.png" />
-  </ItemGroup>
+        <!-- Images -->
+        <MauiImage Include="Resources\Images\*" />
 
+        <!-- Custom Fonts -->
+        <MauiFont Include="Resources\Fonts\*" />
+    </ItemGroup>
+
+    <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+        <!-- Required - WinUI does not yet have buildTransitive for everything -->
+        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-experimental1" />
+        <PackageReference Include="Microsoft.WindowsAppSDK.Foundation" Version="1.0.0-experimental1" />
+        <PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="1.0.0-experimental1" />
+        <PackageReference Include="Microsoft.WindowsAppSDK.InteractiveExperiences" Version="1.0.0-experimental1" NoWarn="NU1701" />
+		<PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.2" />
+		<PackageReference Include="PInvoke.User32" Version="0.7.104" />
+    </ItemGroup>
+
+    <PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
+        <OutputType>WinExe</OutputType>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <BundleResource Remove="Platforms\iOS\Resources\LaunchScreen.xib" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Remove="Properties\launchSettings.json" />
+    </ItemGroup>
+
+    <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
+        <BundleResource Include="Platforms\MacCatalyst\trayicon.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <InterfaceDefinition Remove="Platforms\iOS\Resources\LaunchScreen.xib" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BlazorWeather\BlazorWeather.csproj" />
+    </ItemGroup>
 </Project>
