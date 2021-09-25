@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Hardcodet.Wpf.TaskbarNotification.Interop
 {
-	public class WindowsTrayIcon
-	{
+    public class WindowsTrayIcon
+    {
         private readonly object lockObject = new object();
 
 
@@ -26,7 +26,7 @@ namespace Hardcodet.Wpf.TaskbarNotification.Interop
         public bool IsTaskbarIconCreated { get; private set; }
 
         public WindowsTrayIcon(string iconFile)
-		{
+        {
             messageSink = new WindowMessageSink();
 
             // init icon data structure
@@ -40,30 +40,30 @@ namespace Hardcodet.Wpf.TaskbarNotification.Interop
             // create the taskbar icon
             CreateTaskbarIcon();
 
-			// register event listeners
-			messageSink.MouseEventReceived += MessageSink_MouseEventReceived;
-			messageSink.TaskbarCreated += MessageSink_TaskbarCreated;
+            // register event listeners
+            messageSink.MouseEventReceived += MessageSink_MouseEventReceived;
+            messageSink.TaskbarCreated += MessageSink_TaskbarCreated;
             //messageSink.ChangeToolTipStateRequest += OnToolTipChange;
         }
 
-		private void MessageSink_TaskbarCreated()
-		{
+        private void MessageSink_TaskbarCreated()
+        {
             RemoveTaskbarIcon();
             CreateTaskbarIcon();
         }
 
-		private void MessageSink_MouseEventReceived(MouseEvent obj)
-		{
-			if (obj == MouseEvent.IconLeftMouseUp)
-			{
+        private void MessageSink_MouseEventReceived(MouseEvent obj)
+        {
+            if (obj == MouseEvent.IconLeftMouseUp)
+            {
                 LeftClick?.Invoke();
-			} else if (obj == MouseEvent.IconRightMouseUp)
-			{
+            } else if (obj == MouseEvent.IconRightMouseUp)
+            {
                 RightClick?.Invoke();
-			}
-		}
+            }
+        }
 
-		private void CreateTaskbarIcon()
+        private void CreateTaskbarIcon()
         {
             lock (lockObject)
             {

@@ -1,7 +1,0 @@
-{
-  "profiles": {
-    "BlazorWeather.Maui.WinUI": {
-      "commandName": "MsixPackage"
-    }
-  }
-}
