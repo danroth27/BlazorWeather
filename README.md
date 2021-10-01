@@ -4,19 +4,13 @@ A simple cross-platform weather app implemented using Blazor and .NET MAUI
 
 ## Run the sample
 
-Install [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0) and setup [.NET MAUI](https://github.com/dotnet/maui/wiki/Getting-Started),
+Install [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0) and setup [.NET MAUI](https://docs.microsoft.com/dotnet/maui/get-started/installation),
 
 ### Windows
 
-To run the Windows version of the app, open the solution in the latest [Visual Studio preview](https://visualstudio.com/preview).
+To run the Windows version of the app, open the solution in the latest [Visual Studio 2020 preview](https://visualstudio.com/preview). You will also need to install the [Single-project MSIX Packaging Tools](https://marketplace.visualstudio.com/items?itemName=ProjectReunion.MicrosoftSingleProjectMSIXPackagingToolsDev17) Visual Studio extension.
 
-You will also need to install 2 preview extensions:
-- https://marketplace.visualstudio.com/items?itemName=ProjectReunion.MicrosoftProjectReunionPreview
-- https://marketplace.visualstudio.com/items?itemName=ProjectReunion.MicrosoftSingleProjectMSIXPackagingTools
-
-Select the "BlazorWeather.Maui.WinUI" project as the startup project.
-
-Run the app using <kbd>F5</kbd> or <kbd>Ctrl+F5</kbd>.
+Select the BlazorWeather.Maui project as the startup project. Also select Windows from the Run drop down menu. Run the app using <kbd>F5</kbd> or <kbd>Ctrl+F5</kbd>.
 
 ### Android
 
@@ -26,7 +20,7 @@ Start the Android emulator first, and then run:
 dotnet build BlazorWeather.Maui -t:Run -f net6.0-android
 ```
 
-To run from Visual Studio, select the BlazorWeather.Maui as the startup project, and select Android Emulator in the Run button drop down. Run the app using <kbd>F5</kbd> or <kbd>Ctrl+F5</kbd>.
+To run from Visual Studio, select the BlazorWeather.Maui as the startup project, and select Android in the Run button drop down menu. Run the app using <kbd>F5</kbd> or <kbd>Ctrl+F5</kbd>.
 
 ### iOS
 
@@ -39,10 +33,3 @@ dotnet build BlazorWeather.Maui -t:Run -f net6.0-ios
 ```
 dotnet build BlazorWeather.Maui -t:Run -f net6.0-maccatalyst
 ```
-
-## Known issues
-
-- Referencing scoped CSS bundles isn't working properly yet.
-  - Workaround: Reference the scope bundle directly
-- Configuring a root component for a `BlazorWebView` from a different project has some issues.
-  - Workaround: Wrap the root component in another component in the .NET MAUI project.
