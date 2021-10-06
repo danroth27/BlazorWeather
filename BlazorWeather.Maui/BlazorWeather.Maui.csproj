@@ -18,7 +18,7 @@
         <ApplicationId>com.microsoft.blazorweather</ApplicationId>
 
         <!-- Versions -->
-			  <ApplicationVersion>1</ApplicationVersion>
+        <ApplicationVersion>1</ApplicationVersion>
 
         <!-- Required for C# Hot Reload -->
         <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
@@ -51,7 +51,8 @@
         <PackageReference Include="Microsoft.WindowsAppSDK.Foundation" Version="1.0.0-experimental1" />
         <PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="1.0.0-experimental1" />
         <PackageReference Include="Microsoft.WindowsAppSDK.InteractiveExperiences" Version="1.0.0-experimental1" NoWarn="NU1701" />
-        <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.2" />
+        <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.0" />
+        <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.26-experimental1" />
         <PackageReference Include="PInvoke.User32" Version="0.7.104" />
     </ItemGroup>
 
@@ -60,11 +61,6 @@
         <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     </PropertyGroup>
 
-	  <PropertyGroup>
-    		<!-- Required - WinUI can't deploy in a multi-targeting environment -->
-    		<RuntimeIdentifier Condition="$(TargetFramework.Contains('-windows'))">win-x64</RuntimeIdentifier>
-  	</PropertyGroup>
-	
     <ItemGroup>
         <Content Remove="Properties\launchSettings.json" />
     </ItemGroup>
@@ -74,6 +70,11 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include="Platforms\Windows\Resources\trayicon.ico" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\BlazorWeather\BlazorWeather.csproj" />
     </ItemGroup>
+
 </Project>
