@@ -23,10 +23,10 @@
         <!-- Required for C# Hot Reload -->
         <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
 
-			  <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
-			  <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
-			  <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
-			  <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.18362.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.18362.0</SupportedOSPlatformVersion>
 			
         <UserSecretsId>6da98b65-8ce9-42d6-b26b-84b7c4b3051a</UserSecretsId>
     </PropertyGroup>
@@ -51,8 +51,8 @@
         <PackageReference Include="Microsoft.WindowsAppSDK.Foundation" Version="1.0.0-experimental1" />
         <PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="1.0.0-experimental1" />
         <PackageReference Include="Microsoft.WindowsAppSDK.InteractiveExperiences" Version="1.0.0-experimental1" NoWarn="NU1701" />
-		    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.2" />
-		    <PackageReference Include="PInvoke.User32" Version="0.7.104" />
+        <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.2" />
+        <PackageReference Include="PInvoke.User32" Version="0.7.104" />
     </ItemGroup>
 
     <PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
