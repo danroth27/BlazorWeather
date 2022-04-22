@@ -8,7 +8,7 @@ Install [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0) and setup [.N
 
 ### Windows
 
-To run the Windows version of the app, open the solution in the latest [Visual Studio 2020 preview](https://visualstudio.com/preview). You will also need to install the [Single-project MSIX Packaging Tools](https://marketplace.visualstudio.com/items?itemName=ProjectReunion.MicrosoftSingleProjectMSIXPackagingToolsDev17) Visual Studio extension.
+To run the Windows version of the app, open the solution in the latest [Visual Studio 2022 preview](https://visualstudio.com/preview). You will also need to install the [Single-project MSIX Packaging Tools](https://marketplace.visualstudio.com/items?itemName=ProjectReunion.MicrosoftSingleProjectMSIXPackagingToolsDev17) Visual Studio extension.
 
 Select the BlazorWeather.Maui project as the startup project. Also select Windows from the Run drop down menu. Run the app using <kbd>F5</kbd> or <kbd>Ctrl+F5</kbd>.
 
